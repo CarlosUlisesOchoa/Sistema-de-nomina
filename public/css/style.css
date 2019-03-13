@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#logo-main {
+	display: block;
+	margin: 20px auto;
+}
+
+body{
+    margin-left:50px;
+	margin-right:50px;
+}
+
+.inside-col {
+  width: 100%; 
+  border:none; 
+  display:inline-block;
+}
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+#avatar-new-info {
+	display: none;
+}
+
+#avatar-actual {
+	cursor: pointer;
+}
+
+.fadex {
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    -moz-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+.fadex.in {
+    opacity: 1;
+}
+
+.fadeimg {
+  position:relative;
+  margin:0 auto;
+}
+
+.fadeimg img {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fadeimg img.top:hover {
+  opacity:0;
+}

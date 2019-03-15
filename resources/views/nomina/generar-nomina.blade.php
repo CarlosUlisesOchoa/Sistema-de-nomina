@@ -82,19 +82,21 @@
             </div>
         </div>
 
-        <div id="monto-vacaciones" class="form-group row display-none">
-            <label class="col-md-4 col-form-label text-md-right">Monto por vacaciones</label>
+        <div id="hidden-vacaciones" class="display-none">
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Monto por vacaciones</label>
 
-            <div class="col-md-6">
-                <input type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                </div>
             </div>
-        </div>
 
-        <div id="prima-vacacional" class="form-group row  display-none">
-            <label class="col-md-4 col-form-label text-md-right">Prima vacacional</label>
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Prima vacacional</label>
 
-            <div class="col-md-6">
-                <input type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                </div>
             </div>
         </div>
 
@@ -102,11 +104,11 @@
             <label class="col-md-4 col-form-label text-md-right">Aguinaldo</label>
 
             <div class="col-md-4 pr-md-0">
-                <input type="text" class="form-control" name="datos_Empleado" value="Habilite sólo si aplica" disabled>
+                <input id="aguinaldo" type="text" class="form-control" name="datos_Empleado" value="Habilite sólo si aplica" disabled>
             </div>
 
             <div class="col-md-2 pl-md-0">
-                <a style="width: 100%" class="btn btn-success" href="#!" role="button">Habilitar</a>
+                <a id="btn-aguinaldo" style="width: 100%" class="btn btn-success" href="#!" role="button">Habilitar</a>
             </div>
         </div>
 
@@ -122,19 +124,11 @@
             <label class="col-md-4 col-form-label text-md-right">Utilidades</label>
 
             <div class="col-md-4 pr-md-0">
-                <input type="text" class="form-control" name="datos_Empleado" value="Habilite sólo si aplica" disabled>
+                <input id="utilidades" type="text" class="form-control" name="datos_Empleado" value="Habilite sólo si aplica" disabled>
             </div>
 
             <div class="col-md-2 pl-md-0">
-                <a style="width: 100%" class="btn btn-success" href="#!" role="button">Habilitar</a>
-            </div>
-        </div>
-
-        <div id="monto-aguinaldo" class="form-group row  display-none">
-            <label class="col-md-4 col-form-label text-md-right">Monto por utilidades</label>
-
-            <div class="col-md-6">
-                <input type="text" class="form-control" name="datos_Empleado" value="">
+                <a id="btn-utilidades" style="width: 100%" class="btn btn-success" href="#!" role="button">Habilitar</a>
             </div>
         </div>
 
@@ -197,34 +191,30 @@
 <script>
 
     $('#btn-vacaciones').click(function() {
-        manage_Input($('#vacaciones'));
-
-        if(false == true) {
-
-        let enabled_Input = !$('#vacaciones').prop("disabled");
-        $('#vacaciones').prop("disabled", enabled_Input);
-        $('#vacaciones').val( enabled_Input ? "Habilite sólo si aplica" : "");
-        $('#btn-vacaciones').addClass( enabled_Input ? 'btn-success' : 'btn-danger').removeClass( enabled_Input ? 'btn-danger' : 'btn-success');
-        $('#btn-vacaciones').text( enabled_Input ? "Habilitar" : "Deshabilitar");
-        if(enabled_Input) { // Si está habilitado 
-            $('#monto-vacaciones').fadeOut('slow'); 
-            $('#prima-vacacional').fadeOut('slow');
-        } else {
-            $('#monto-vacaciones').fadeIn('slow');
-            $('#monto-vacaciones').css("display", "flex");
-            $('#prima-vacacional').fadeIn('slow');
-            $('#prima-vacacional').css("display", "flex");
-            $('#vacaciones').focus(); 
-        }
-
-        }
-        
+        manage_Input($('#vacaciones'), $(this), $('#hidden-vacaciones'), "block");
     });
 
-    function manage_Input(input) {
+    $('#btn-aguinaldo').click(function() {
+        manage_Input($('#aguinaldo'), $(this), $('#monto-aguinaldo'), "flex");
+    });
+
+    $('#btn-utilidades').click(function() {
+        manage_Input($('#utilidades'), $(this));
+    });
+
+    function manage_Input(input, btn, hidden_Div, display_Type) {
         let enabled_Input = !$(input).prop("disabled");
         $(input).prop("disabled", enabled_Input);
         $(input).val( enabled_Input ? "Habilite sólo si aplica" : "");
+        $(btn).addClass( enabled_Input ? 'btn-success' : 'btn-danger').removeClass( enabled_Input ? 'btn-danger' : 'btn-success');
+        $(btn).text( enabled_Input ? "Habilitar" : "Deshabilitar");
+        if(enabled_Input) { // Si está habilitado
+            $(hidden_Div).fadeOut('slow');
+        } else {
+            $(hidden_Div).fadeIn('slow');
+            $(hidden_Div).css("display", display_Type);
+            $(input).focus();
+        }
         
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class NominaController extends Controller
 {
@@ -28,9 +29,10 @@ class NominaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function generar($id_Empleado)
     {
-        return view('nomina.crear-nomina');
+        $empleado = User::where('id', $id_Empleado)->first();
+        return view('nomina.generar-nomina')->with('empleado', $empleado);
     }
 
     /**

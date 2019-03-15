@@ -26,6 +26,14 @@ body{
 	display: none;
 }
 
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
 #avatar-actual {
 	cursor: pointer;
 }

@@ -55,5 +55,8 @@ Route::resource('tipos-nomina', 'TiposNominaController')
 Route::get('/nomina/{id}/borrar', 'NominaController@delete')    
     ->middleware('is_admin');
 
+Route::get('/nomina/generar/{id_Empleado}', 'NominaController@generar')    
+    ->middleware('is_admin');
+
 Route::resource('nomina', 'NominaController')    
     ->middleware('is_admin');

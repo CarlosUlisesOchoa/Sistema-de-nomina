@@ -39,7 +39,7 @@
 
                     <div class="row no-gutters justify-content-center">
 
-                        <div class="col-xs-12 pb-2 col-md-6 pr-md-2 col-lg-4 col-xl-3 pb-xl-0"><a class="btn btn-secondary inside-col" href="{{ url('empleados') }}" role="button">Generar una nómina</a></div>
+                        <div class="col-xs-12 pb-2 col-md-6 pr-md-2 col-lg-4 col-xl-3 pb-xl-0"><a class="btn btn-secondary inside-col" href="#!" id="btn_Generar_Nomina" role="button">Generar una nómina</a></div>
                         <div class="col-xs-12 col-md-6 pr-md-2 col-lg-4 col-xl-3"><a class="btn btn-secondary inside-col" href="{{ url('areas') }}" role="button">Gestionar nóminas creadas</a></div>
                     
                     </div>
@@ -55,3 +55,25 @@
 </div>
 
 @endsection
+
+@section('extra-scripts')
+<script>
+$('#btn_Generar_Nomina').click(function() {
+    swal({
+      content: "input",
+      title: "Generar nómina",
+      text: "No. de empleado para el cual generará la nómina:",
+      icon: "{{asset('images/money.png')}}",
+      buttons: true,
+      buttons: ["Cancelar", "Confirmar"],
+    })
+    .then((value) => {
+      if(value != null && $.isNumeric(value)) {
+        window.location.replace("{{ url('nomina').'/generar/'}}" + value);
+      }
+    });
+});
+</script>
+@endsection
+
+

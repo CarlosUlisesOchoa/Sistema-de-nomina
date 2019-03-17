@@ -39,6 +39,8 @@
 
               <th>Tipo de nómina</th>
 
+              <th>Número de días</th>
+
             </thead>
 
             <tbody>
@@ -49,6 +51,8 @@
                 <td>{{$tipo_nomina->id}}</td>
 
                 <td>{{$tipo_nomina->nombre}}</td>
+
+                <td>{{$tipo_nomina->num_dias}}</td>
 
               </tr>
 

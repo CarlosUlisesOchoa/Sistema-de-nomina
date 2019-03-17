@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-
+use Alert;
 class NominaController extends Controller
 {
     /**
@@ -32,7 +32,12 @@ class NominaController extends Controller
     public function generar($id_Empleado)
     {
         $empleado = User::where('id', $id_Empleado)->first();
-        return view('nomina.generar-nomina')->with('empleado', $empleado);
+        if($empleado != null) {
+            return view('nomina.generar-nomina')->with('empleado', $empleado);
+        } else {
+            Alert::error('El número de empleado que acaba de ingresar no fue encontrado', 'Error')->autoclose(6000);
+            return redirect('admin');
+        }
     }
 
     /**

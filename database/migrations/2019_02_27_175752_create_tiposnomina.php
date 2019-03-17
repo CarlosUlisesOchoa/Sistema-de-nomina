@@ -16,15 +16,16 @@ class CreateTiposnomina extends Migration
         Schema::create('tiposnomina', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
+            $table->integer('num_dias');
             $table->timestamps();
         });
 
         $tiposn = array(
-            array('nombre' => 'Quincenal'),
-            array('nombre' => 'Diaria'),
-            array('nombre' => 'Semanal'),
-            array('nombre' => 'Catorcena'),
-            array('nombre' => 'Mensual')
+            array('nombre' => 'Quincenal', 'num_dias' => 15),
+            array('nombre' => 'Diaria', 'num_dias' => 1),
+            array('nombre' => 'Semanal', 'num_dias' => 7),
+            array('nombre' => 'Catorcena', 'num_dias' => 14),
+            array('nombre' => 'Mensual', 'num_dias' => 31),
         ); 
 
         DB::table('tiposnomina')->insert($tiposn);

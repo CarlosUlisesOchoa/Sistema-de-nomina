@@ -45,6 +45,35 @@ $(".curp-rfc").on("keyup", function(event){
     }
 });
 
+function toMoney(amount) {
+    let neg = false;
+    if(amount < 0) {
+        neg = true;
+        amount = Math.abs(amount);
+    }
+    return ( (neg ? "-" : "") + "$ " + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+}
+
+function moneyToVar(moneyStr) {
+    return parseFloat(moneyStr.replace("$ ", "").replace(",", ""));
+}
+
+$(".cash").click(function () {
+    $(this).val(moneyToVar($(this).val()));
+});
+
+$(".cash").on("blur", function () {
+    if (!$.isNumeric($(this).val()))
+        $(this).val('0').trigger('change');
+
+    let neg = false;
+    if($(this).val().includes("-")) {
+        neg = true;
+        $(this).val($(this).val().replace("-", ""));
+    }
+    $(this).val( (neg ? "-" : "") + "$ " + parseFloat($(this).val(), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+});
+
 
 $(".letters-space").on("keydown", function(event){
 // Allow controls such as backspace, tab etc.
@@ -117,8 +146,8 @@ $(".alpha-numeric").on("input", function(){
 });
 
 $(".float").on("keydown", function(event){
-// Allow: backspace, delete, tab, escape, enter and .
-if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+// Allow: backspace, delete, tab, escape, enter, - and .
+if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 109, 110, 189, 190]) !== -1 ||
   // Allow: Ctrl+A,Ctrl+C,Ctrl+V, Command+A
   ((e.keyCode == 65 || e.keyCode == 86 || e.keyCode == 67) && (e.ctrlKey === true || e.metaKey === true)) ||
   // Allow: home, end, left, right, down, up
@@ -133,7 +162,7 @@ if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.k
 });
 
 $(".float").on("input", function(){
-    var regexp = /[^0-9.]/g;
+    var regexp = /[^0-9.-]/g;
     if($(this).val().match(regexp)){
         $(this).val( $(this).val().replace(regexp,'') );
     }

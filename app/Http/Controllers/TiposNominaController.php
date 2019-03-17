@@ -46,10 +46,12 @@ class TiposNominaController extends Controller
     {
         $data = $this->validate($request, [
             'nombre' => 'required',
+            'num_dias' => 'required',
         ]);
 
         TiposNomina::create([
             'nombre' => $data['nombre'],
+            'num_dias' => $data['num_dias'],
         ]);
         Alert::success('¡ La nueva tiponomina fue registrado exitosamente !')->autoclose(4000);
         return redirect('tipos-nomina');
@@ -79,6 +81,7 @@ class TiposNominaController extends Controller
         $data = $this->validate($request, [
             'id' => 'required',
             'nombre' => 'required',
+            'num_dias' => 'required',
         ]);
 
         try {

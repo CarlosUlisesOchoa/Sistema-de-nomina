@@ -47,6 +47,14 @@
             </div>
         </div>
 
+        <div class="form-group row">
+        <label class="col-md-4 col-form-label text-md-right">Número de días</label>
+
+        <div class="col-md-6">
+            <input type="text" class="digits-only form-control" name="num_dias" value="" requiered>
+        </div>
+    </div>
+
         <a class="mt-3 mr-3 btn btn-secondary" href="{{ url('tipos-nomina') }}" role="button">Regresar</a>
         {!! Form::submit('Registrar', ['class' => 'mt-3 btn btn-primary']) !!}
 

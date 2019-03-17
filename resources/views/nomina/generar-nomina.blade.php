@@ -152,7 +152,7 @@
             <label class="col-md-4 col-form-label text-md-right">ISR</label>
 
             <div class="col-md-6">
-                <input id="input-ISR" type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="input-ISR" type="text" class="form-control text-danger" name="datos_Empleado" value="" disabled>
             </div>
         </div>
 
@@ -160,7 +160,7 @@
             <label class="col-md-4 col-form-label text-md-right">IMSS</label>
 
             <div class="col-md-6">
-                <input id="input-IMSS" type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="input-IMSS" type="text" class="form-control text-danger" name="datos_Empleado" value="" disabled>
             </div>
         </div>
 
@@ -168,7 +168,7 @@
             <label class="col-md-4 col-form-label text-md-right">Cuota sindical</label>
 
             <div class="col-md-6">
-                <input id="input-cuota-sindical" type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="input-cuota-sindical" type="text" class="form-control text-danger" name="datos_Empleado" value="" disabled>
             </div>
         </div>
 
@@ -205,9 +205,10 @@ $( document ).ready(function() {
     $("#fec_1").val(dateFormat(startDate));
     $("#fec_2").val(dateFormat(todaysDate));
     $("#sueldo").val(toMoney(salario_Diario * diasNomina));
-    $('#total-pago').val($("#sueldo").val());
-    $('#input-IMSS').val(toMoney((salario_Diario * diasNomina)*(0.02375)));
-    $('#input-cuota-sindical').val(toMoney((salario_Diario * 0.01)));
+    $('#input-ISR').val(toMoney(-(100)));
+    $('#input-IMSS').val(toMoney(-(salario_Diario * diasNomina)*(0.02375)));
+    $('#input-cuota-sindical').val(toMoney(-(salario_Diario * 0.01)));
+    updateSueldo();
 });
 
 function dateFormat(date) {
@@ -226,7 +227,7 @@ function updateSueldo(){
     total_amount += (salario_Diario * diasNomina);
     if($('#input-descuento-faltas').val().length > 0) {
         let faltas = $('#input-faltas').val();
-        total_amount -= (salario_Diario * faltas);
+        total_amount += -(salario_Diario * faltas);
     }
     if($('#input-monto-vacaciones').val().length > 0) {
         total_amount += moneyToVar($('#input-monto-vacaciones').val());
@@ -239,6 +240,9 @@ function updateSueldo(){
             total_amount += moneyToVar($('#input-utilidades').val());
         }
     }
+    total_amount += moneyToVar($('#input-ISR').val());
+    total_amount += moneyToVar($('#input-IMSS').val());
+    total_amount += moneyToVar($('#input-cuota-sindical').val());
 
     $("#total-pago").val(toMoney(total_amount));
 }

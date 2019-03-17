@@ -209,6 +209,13 @@ $( document ).ready(function() {
     $('#input-IMSS').val(toMoney(-(salario_Diario * diasNomina)*(0.02375)));
     $('#input-cuota-sindical').val(toMoney(-(salario_Diario * 0.01)));
     updateSueldo();
+
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+    });
 });
 
 function dateFormat(date) {
@@ -262,6 +269,13 @@ function manage_Input(input, btn, hidden_Div, display_Type) {
     }    
 }
 
+$("#fec_1").change(function() {
+    let newDate = strToDate($(this).val());
+    newDate.setDate(newDate.getDate() + {{\App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->num_dias}});
+    $('#fec_2').val(dateFormat(newDate));
+
+});
+
 $('#input-faltas').on( "input", function() {
     let faltas = $(this).val();
     if(faltas > 0) {
@@ -288,11 +302,16 @@ $('#input-vacaciones').on( "input", function() {
     updateSueldo();
 });
 
-$("#fec_1").change(function() {
-    let newDate = strToDate($(this).val());
-    newDate.setDate(newDate.getDate() + {{\App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->num_dias}});
-    $('#fec_2').val(dateFormat(newDate));
+$('#input-vacaciones').on( "blur", function() {
+    if($(this).val().trim().length == 0) {
+        $('#btn-vacaciones').click();
+    }
+});
 
+$('#input-utilidades').on( "blur", function() {
+    if(moneyToVar($(this).val()) == 0) {
+        $('#btn-utilidades').click();
+    }
 });
 
 $('#btn-vacaciones').click(function() {

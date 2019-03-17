@@ -152,7 +152,7 @@
             <label class="col-md-4 col-form-label text-md-right">ISR</label>
 
             <div class="col-md-6">
-                <input type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="input-ISR" type="text" class="form-control" name="datos_Empleado" value="" disabled>
             </div>
         </div>
 
@@ -160,7 +160,7 @@
             <label class="col-md-4 col-form-label text-md-right">IMSS</label>
 
             <div class="col-md-6">
-                <input type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="input-IMSS" type="text" class="form-control" name="datos_Empleado" value="" disabled>
             </div>
         </div>
 
@@ -168,7 +168,7 @@
             <label class="col-md-4 col-form-label text-md-right">Cuota sindical</label>
 
             <div class="col-md-6">
-                <input type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="input-cuota-sindical" type="text" class="form-control" name="datos_Empleado" value="" disabled>
             </div>
         </div>
 
@@ -181,7 +181,7 @@
         </div>
 
         <a class="mt-3 mr-3 btn btn-secondary" href="{{ url('tiposnomina') }}" role="button">Regresar</a>
-        {!! Form::submit('Registrar', ['class' => 'mt-3 btn btn-primary']) !!}
+        {!! Form::submit('Generar', ['class' => 'mt-3 btn btn-primary']) !!}
 
         {!! Form::close() !!}
 
@@ -206,6 +206,8 @@ $( document ).ready(function() {
     $("#fec_2").val(dateFormat(todaysDate));
     $("#sueldo").val(toMoney(salario_Diario * diasNomina));
     $('#total-pago').val($("#sueldo").val());
+    $('#input-IMSS').val(toMoney((salario_Diario * diasNomina)*(0.02375)));
+    $('#input-cuota-sindical').val(toMoney((salario_Diario * 0.01)));
 });
 
 function dateFormat(date) {

@@ -36,7 +36,7 @@
         <div class="row justify-content-center" >
             <div class="profile-header-container">   
                 <div class="profile-header-img">
-                    <img class="mb-4 mx-auto d-block rounded-circle" src="/storage/images/avatars/{{ $empleado->avatar }}" width="128" id="avatar-actual" style="cursor: pointer;"/>
+                    <img class="mb-4 mx-auto d-block rounded-circle" src="/storage/images/avatars/{{ $empleado->avatar }}" width="128" id="avatar-actual"/>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
         <label class="col-md-4 col-form-label text-md-right">Empleado</label>
 
         <div class="col-md-6">
-            <input type="text" class="form-control" name="datos_Empleado" value="{{sprintf("[%d] %s %s", $empleado->id, $empleado->nombres, $empleado->apellidos)}}" readonly>
+            <input type="text" class="form-control" value="{{sprintf("[%d] %s %s", $empleado->id, $empleado->nombres, $empleado->apellidos)}}" readonly>
         </div>
     </div>
 
@@ -54,7 +54,15 @@
         <label class="col-md-4 col-form-label text-md-right">Tipo de nómina</label>
 
         <div class="col-md-6">
-            <input id="tipo_nomina" type="text" class="form-control" name="datos_Empleado" value="{{\App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->nombre}}" readonly>
+            <input id="tipo_nomina" type="text" class="form-control" value="{{\App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->nombre}}" readonly>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-4 col-form-label text-md-right">No. único de nómina</label>
+
+        <div class="col-md-6">
+            <input type="text" class="form-control" value="Se generará automáticamente" readonly>
         </div>
     </div>
 
@@ -64,11 +72,11 @@
         <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right">Periodo</label>
             <div id="date-picker" class="col-md-3 input-append date">
-                <input id="fec_1" name="fec_1" value="" class="date-picker1">
+                <input id="inicio_periodo" name="inicio_periodo" value="" class="date-picker1">
             </div>
             <label> - </label>
             <div id="date-picker" class="col-md-3 input-append date">
-                <input id="fec_2" name="fec_2" value="" class="date-picker2" disabled>
+                <input id="fin_periodo" name="fin_periodo" value="" class="date-picker2" readonly>
             </div>
         </div>
 
@@ -76,7 +84,7 @@
             <label class="col-md-4 col-form-label text-md-right">Sueldo</label>
 
             <div class="col-md-6">
-                <input id="sueldo" type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="sueldo" type="text" class="form-control" name="monto_sueldo" value="" disabled>
             </div>
         </div>
 
@@ -84,7 +92,7 @@
             <label class="col-md-4 col-form-label text-md-right">Faltas</label>
 
             <div class="col-md-6">
-                <input id="input-faltas" type="text" class="digits-only form-control" name="datos_Empleado" value="" placeholder="Dejar vacio este espacio en caso de ser 0" autofocus>
+                <input id="input-faltas" type="text" class="digits-only form-control" name="dias_faltas" value="" placeholder="Dejar vacio este espacio en caso de ser 0" autofocus>
             </div>
         </div>
 
@@ -92,7 +100,7 @@
             <label class="col-md-4 col-form-label text-md-right">Descuento por faltas</label>
 
             <div class="col-md-6">
-                <input id="input-descuento-faltas" type="text" class="form-control text-danger" name="datos_Empleado" value="" disabled>
+                <input id="input-descuento-faltas" type="text" class="form-control text-danger" name="monto_faltas" value="" disabled>
             </div>
         </div>
 
@@ -100,7 +108,7 @@
             <label class="col-md-4 col-form-label text-md-right">Vacaciones (No. de días)</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-vacaciones" type="text" class="form-control" name="datos_Empleado" value="Habilite sólo si aplica" disabled>
+                <input id="input-vacaciones" type="text" class="form-control" name="dias_vacaciones" value="Habilite sólo si aplica" disabled>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -113,7 +121,7 @@
                 <label class="col-md-4 col-form-label text-md-right">Monto por vacaciones</label>
 
                 <div class="col-md-6">
-                    <input id="input-monto-vacaciones" type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                    <input id="input-monto-vacaciones" type="text" class="form-control" name="monto_vacaciones" value="" disabled>
                 </div>
             </div>
 
@@ -121,7 +129,7 @@
                 <label class="col-md-4 col-form-label text-md-right">Prima vacacional</label>
 
                 <div class="col-md-6">
-                    <input id="input-prima-vacacional" type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                    <input id="input-prima-vacacional" type="text" class="form-control" name="monto_primavacacional" value="" disabled>
                 </div>
             </div>
         </div>
@@ -130,7 +138,7 @@
             <label class="col-md-4 col-form-label text-md-right">Aguinaldo</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-aguinaldo" type="text" class="form-control" name="datos_Empleado" value="Habilite sólo si aplica" disabled>
+                <input id="input-aguinaldo" type="text" class="form-control" name="dias_aguinaldo" value="Habilite sólo si aplica" disabled>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -142,7 +150,7 @@
             <label class="col-md-4 col-form-label text-md-right">Monto por aguinaldo</label>
 
             <div class="col-md-6">
-                <input id="input-monto-aguinaldo" type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="input-monto-aguinaldo" type="text" class="form-control" name="monto_aguinaldo" value="" disabled>
             </div>
         </div>
 
@@ -150,7 +158,7 @@
             <label class="col-md-4 col-form-label text-md-right">Utilidades</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-utilidades" type="text" class="float cash form-control" name="datos_Empleado" value="Habilite sólo si aplica" disabled>
+                <input id="input-utilidades" type="text" class="float cash form-control" name="monto_utilidades" value="Habilite sólo si aplica" disabled>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -162,7 +170,7 @@
             <label class="col-md-4 col-form-label text-md-right">ISR</label>
 
             <div class="col-md-6">
-                <input id="input-ISR" type="text" class="form-control text-danger" name="datos_Empleado" value="" disabled>
+                <input id="input-ISR" type="text" class="form-control text-danger" name="monto_isr" value="" disabled>
             </div>
         </div>
 
@@ -170,7 +178,7 @@
             <label class="col-md-4 col-form-label text-md-right">IMSS</label>
 
             <div class="col-md-6">
-                <input id="input-IMSS" type="text" class="form-control text-danger" name="datos_Empleado" value="" disabled>
+                <input id="input-IMSS" type="text" class="form-control text-danger" name="monto_imss" value="" disabled>
             </div>
         </div>
 
@@ -178,7 +186,7 @@
             <label class="col-md-4 col-form-label text-md-right">Cuota sindical</label>
 
             <div class="col-md-6">
-                <input id="input-cuota-sindical" type="text" class="form-control text-danger" name="datos_Empleado" value="" disabled>
+                <input id="input-cuota-sindical" type="text" class="form-control text-danger" name="monto_cuotasindical" value="" disabled>
             </div>
         </div>
 
@@ -186,12 +194,12 @@
             <label class="col-md-4 col-form-label text-md-right">Total a pagar</label>
 
             <div class="col-md-6">
-                <input id="total-pago" type="text" class="form-control" name="datos_Empleado" value="" disabled>
+                <input id="total-pago" type="text" class="form-control" name="total_pago" value="" disabled>
             </div>
         </div>
 
-        <a class="mt-3 mr-3 btn btn-secondary" href="{{ url('tiposnomina') }}" role="button">Regresar</a>
-        {!! Form::submit('Generar', ['class' => 'mt-3 btn btn-primary']) !!}
+        <a class="mt-3 mr-3 btn btn-secondary" href="{{ url('admin') }}" role="button">Regresar</a>
+        {!! Form::submit('Generar', ['class' => 'mt-3 btn btn-success']) !!}
 
         {!! Form::close() !!}
 
@@ -212,8 +220,8 @@ $( document ).ready(function() {
     let todaysDate = new Date();
     let startDate = new Date();
     startDate.setDate(startDate.getDate() -(diasNomina));
-    $("#fec_1").val(dateFormat(startDate));
-    $("#fec_2").val(dateFormat(todaysDate));
+    $("#inicio_periodo").val(dateFormat(startDate));
+    $("#fin_periodo").val(dateFormat(todaysDate));
     $("#sueldo").val(toMoney(salario_Diario * diasNomina));
     $('#input-ISR').val(toMoney(-((salario_Diario * diasNomina) * {{$isr/100}})));
     $('#input-IMSS').val(toMoney(-(salario_Diario * diasNomina)*(0.02375)));
@@ -279,10 +287,10 @@ function manage_Input(input, btn, hidden_Div, display_Type) {
     }    
 }
 
-$("#fec_1").change(function() {
+$("#inicio_periodo").change(function() {
     let newDate = strToDate($(this).val());
     newDate.setDate(newDate.getDate() + ({{\App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->num_dias}}));
-    $('#fec_2').val(dateFormat(newDate));
+    $('#fin_periodo').val(dateFormat(newDate));
 
 });
 

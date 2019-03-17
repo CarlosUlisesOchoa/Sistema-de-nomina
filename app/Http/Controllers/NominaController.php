@@ -32,8 +32,11 @@ class NominaController extends Controller
     public function generar($id_Empleado)
     {
         $empleado = User::where('id', $id_Empleado)->first();
+        $dias_nomina = \App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->num_dias;
+        $sueldo = ($empleado->salario_diario * $dias_nomina);
+        $isr = \App\ISR::where('lim_inferior', '<=', $sueldo)->where('lim_superior', '>=', $sueldo)->where('frecuencia_pago', $dias_nomina)->get()->first()->porcentaje;
         if($empleado != null) {
-            return view('nomina.generar-nomina')->with('empleado', $empleado);
+            return view('nomina.generar-nomina')->with('empleado', $empleado)->with('isr', $isr);
         } else {
             Alert::error('El número de empleado que acaba de ingresar no fue encontrado', 'Error')->autoclose(6000);
             return redirect('admin');
@@ -67,7 +70,7 @@ class NominaController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('nomina.ver-nomina');
     }
 
     /**

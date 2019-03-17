@@ -32,6 +32,16 @@
 
 <div class="card-body">
 
+    <div class="container">
+        <div class="row justify-content-center" >
+            <div class="profile-header-container">   
+                <div class="profile-header-img">
+                    <img class="mb-4 mx-auto d-block rounded-circle" src="/storage/images/avatars/{{ $empleado->avatar }}" width="128" id="avatar-actual" style="cursor: pointer;"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="form-group row">
         <label class="col-md-4 col-form-label text-md-right">Empleado</label>
 
@@ -201,11 +211,11 @@ var salario_Diario = {{$empleado->salario_diario}};
 $( document ).ready(function() {
     let todaysDate = new Date();
     let startDate = new Date();
-    startDate.setDate(startDate.getDate() -diasNomina);
+    startDate.setDate(startDate.getDate() -(diasNomina));
     $("#fec_1").val(dateFormat(startDate));
     $("#fec_2").val(dateFormat(todaysDate));
     $("#sueldo").val(toMoney(salario_Diario * diasNomina));
-    $('#input-ISR').val(toMoney(-(100)));
+    $('#input-ISR').val(toMoney(-((salario_Diario * diasNomina) * {{$isr/100}})));
     $('#input-IMSS').val(toMoney(-(salario_Diario * diasNomina)*(0.02375)));
     $('#input-cuota-sindical').val(toMoney(-(salario_Diario * 0.01)));
     updateSueldo();
@@ -271,7 +281,7 @@ function manage_Input(input, btn, hidden_Div, display_Type) {
 
 $("#fec_1").change(function() {
     let newDate = strToDate($(this).val());
-    newDate.setDate(newDate.getDate() + {{\App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->num_dias}});
+    newDate.setDate(newDate.getDate() + ({{\App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->num_dias}}));
     $('#fec_2').val(dateFormat(newDate));
 
 });

@@ -70,6 +70,11 @@ class User extends Authenticatable
          return $this->belongsTo('App\TiposNomina', 'id_tiponomina', 'id');
     }
 
+    public function nominas()
+    {
+        return $this->hasMany('App\Nomina');
+    }
+
     public static function getOpciones($dato){
         $consulta = sprintf("SHOW COLUMNS FROM empleados WHERE Field = \"%s\"", $dato);
         $type = DB::select(DB::raw($consulta))[0]->Type;

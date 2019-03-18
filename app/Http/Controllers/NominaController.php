@@ -51,10 +51,15 @@ class NominaController extends Controller
      */
     public function store(Request $request)
     {
-
         return $request;
         $data = $this->validate($request, [
-            'password' => 'required',
+            'inicio_periodo' => 'required',
+            'fin_periodo' => 'required',
+            'monto_sueldo' => 'required',
+            'monto_isr' => 'required',
+            'monto_imss' => 'required',
+            'monto_cuotasindical' => 'required',
+            'monto_totalpago' => 'required',
         ]);
 
         User::create([

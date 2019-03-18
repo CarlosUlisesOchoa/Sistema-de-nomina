@@ -84,7 +84,7 @@
             <label class="col-md-4 col-form-label text-md-right">Sueldo</label>
 
             <div class="col-md-6">
-                <input id="sueldo" type="text" class="form-control" name="monto_sueldo" value="" disabled>
+                <input id="sueldo" type="text" class="form-control" name="monto_sueldo" value="" readonly>
             </div>
         </div>
 
@@ -100,7 +100,7 @@
             <label class="col-md-4 col-form-label text-md-right">Descuento por faltas</label>
 
             <div class="col-md-6">
-                <input id="input-descuento-faltas" type="text" class="form-control text-danger" name="monto_faltas" value="" disabled>
+                <input id="input-descuento-faltas" type="text" class="form-control text-danger" name="monto_faltas" value="" readonly>
             </div>
         </div>
 
@@ -108,7 +108,7 @@
             <label class="col-md-4 col-form-label text-md-right">Vacaciones (No. de días)</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-vacaciones" type="text" class="form-control" name="dias_vacaciones" value="Habilite sólo si aplica" disabled>
+                <input id="input-vacaciones" type="text" class="form-control" name="dias_vacaciones" value="Habilite sólo si aplica" readonly>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -121,7 +121,7 @@
                 <label class="col-md-4 col-form-label text-md-right">Monto por vacaciones</label>
 
                 <div class="col-md-6">
-                    <input id="input-monto-vacaciones" type="text" class="form-control" name="monto_vacaciones" value="" disabled>
+                    <input id="input-monto-vacaciones" type="text" class="form-control" name="monto_vacaciones" value="" readonly>
                 </div>
             </div>
 
@@ -129,7 +129,7 @@
                 <label class="col-md-4 col-form-label text-md-right">Prima vacacional</label>
 
                 <div class="col-md-6">
-                    <input id="input-prima-vacacional" type="text" class="form-control" name="monto_primavacacional" value="" disabled>
+                    <input id="input-prima-vacacional" type="text" class="form-control" name="monto_primavacacional" value="" readonly>
                 </div>
             </div>
         </div>
@@ -138,7 +138,7 @@
             <label class="col-md-4 col-form-label text-md-right">Aguinaldo</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-aguinaldo" type="text" class="form-control" name="dias_aguinaldo" value="Habilite sólo si aplica" disabled>
+                <input id="input-aguinaldo" type="text" class="form-control" name="dias_aguinaldo" value="Habilite sólo si aplica" readonly>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -150,7 +150,7 @@
             <label class="col-md-4 col-form-label text-md-right">Monto por aguinaldo</label>
 
             <div class="col-md-6">
-                <input id="input-monto-aguinaldo" type="text" class="form-control" name="monto_aguinaldo" value="" disabled>
+                <input id="input-monto-aguinaldo" type="text" class="form-control" name="monto_aguinaldo" value="" readonly>
             </div>
         </div>
 
@@ -158,7 +158,7 @@
             <label class="col-md-4 col-form-label text-md-right">Utilidades</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-utilidades" type="text" class="float cash form-control" name="monto_utilidades" value="Habilite sólo si aplica" disabled>
+                <input id="input-utilidades" type="text" class="float cash form-control" name="monto_utilidades" value="Habilite sólo si aplica" readonly>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -170,7 +170,7 @@
             <label class="col-md-4 col-form-label text-md-right">ISR</label>
 
             <div class="col-md-6">
-                <input id="input-ISR" type="text" class="form-control text-danger" name="monto_isr" value="" disabled>
+                <input id="input-ISR" type="text" class="form-control text-danger" name="monto_isr" value="" readonly>
             </div>
         </div>
 
@@ -178,7 +178,7 @@
             <label class="col-md-4 col-form-label text-md-right">IMSS</label>
 
             <div class="col-md-6">
-                <input id="input-IMSS" type="text" class="form-control text-danger" name="monto_imss" value="" disabled>
+                <input id="input-IMSS" type="text" class="form-control text-danger" name="monto_imss" value="" readonly>
             </div>
         </div>
 
@@ -186,7 +186,7 @@
             <label class="col-md-4 col-form-label text-md-right">Cuota sindical</label>
 
             <div class="col-md-6">
-                <input id="input-cuota-sindical" type="text" class="form-control text-danger" name="monto_cuotasindical" value="" disabled>
+                <input id="input-cuota-sindical" type="text" class="form-control text-danger" name="monto_cuotasindical" value="" readonly>
             </div>
         </div>
 
@@ -194,7 +194,7 @@
             <label class="col-md-4 col-form-label text-md-right">Total a pagar</label>
 
             <div class="col-md-6">
-                <input id="total-pago" type="text" class="form-control" name="total_pago" value="" disabled>
+                <input id="total-pago" type="text" class="form-control" name="monto_totalpago" value="" readonly>
             </div>
         </div>
 
@@ -260,7 +260,7 @@ function updateSueldo(){
     if($('#input-monto-aguinaldo').val().length > 0) {
         total_amount += moneyToVar($('#input-monto-aguinaldo').val());
     }
-    if($('#input-utilidades').prop("disabled") == false) {
+    if($('#input-utilidades').prop("readonly") == false) {
         if($('#input-utilidades').val().length > 0) {
             total_amount += moneyToVar($('#input-utilidades').val());
         }
@@ -273,8 +273,8 @@ function updateSueldo(){
 }
 
 function manage_Input(input, btn, hidden_Div, display_Type) {
-    let enabled_Input = !$(input).prop("disabled");
-    $(input).prop("disabled", enabled_Input);
+    let enabled_Input = !$(input).prop("readonly");
+    $(input).prop("readonly", enabled_Input);
     $(input).val( enabled_Input ? "Habilite sólo si aplica" : "");
     $(btn).addClass( enabled_Input ? 'btn-success' : 'btn-danger').removeClass( enabled_Input ? 'btn-danger' : 'btn-success');
     $(btn).text( enabled_Input ? "Habilitar" : "Deshabilitar");
@@ -334,7 +334,7 @@ $('#input-utilidades').on( "blur", function() {
 
 $('#btn-vacaciones').click(function() {
     manage_Input($('#input-vacaciones'), $(this), $('#hidden-vacaciones'), "block");
-    if($('#input-vacaciones').prop("disabled")) {
+    if($('#input-vacaciones').prop("readonly")) {
         $('#input-monto-vacaciones').val("");
         $('#input-prima-vacacional').val("");
     }

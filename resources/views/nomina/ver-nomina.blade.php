@@ -25,6 +25,12 @@
                 <div class="card-body">
 
                     <div class="content-body">
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <button id="btn-pdf" class="btn btn-primary" role="button">Generar PDF</button>
+                            </div>
+                        </div>
+                        <div id="nomina">
                         <section class="card">
                             <div id="nomina-template" class="card-body">
                                 <!-- nomina Company Details -->
@@ -62,7 +68,7 @@
                                                 <div class="pl-0 col-4">
                                                     <p><span class="text-muted">Folio:</span> #85362</p>
                                                 </div>
-                                                <div class="pr-1 text-right col-8">
+                                                <div class="pr-1 col-8 text-left text-lg-right">
                                                     <p><span class="text-muted">Periodo:</span> 01/05/2016 - 15/05/2016</p>
                                                 </div>
                                             </div>
@@ -104,9 +110,15 @@
                                     </div>
                                 </div>
 
+                                <div style="background: #e8e9ea;" class="row text-center d-flex d-md-none">
+                                    <div class="pt-2 col-12">
+                                        <h4 class="text-dark">Percepciones</h3>
+                                    </div>
+                                </div>
+
                                 <div id="nomina-items-details" class="pt-1 mx-0">
                                     <div class="row">
-                                        <div class="col-6 pl-0">
+                                        <div class="col-12 col-md-6 pl-0">
                                             <div class="table-responsive table-borderless">
                                                 <table class="table">
                                                     <tbody>
@@ -136,7 +148,12 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="col-6 pr-0">
+                                        <div style="background: #e8e9ea;" class="col-12 d-flex d-md-none">
+                                            <div class="pt-2 col-12 text-center">
+                                                <h4 class="text-dark">Deducciones</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 pr-0">
                                             <div class="table-responsive table-borderless">
                                                 <table class="table">
                                                     <tbody>
@@ -207,6 +224,7 @@
 
                             </div>
                         </section>
+                        </div>
                     </div>
 
                 </div>
@@ -215,6 +233,28 @@
     </div>
 </div>
 @endsection @section('extra-scripts')
-<script>
-</script>
+<script src="../assets/jsPDF/jspdf.debug.js"></script>
+            <script src="../assets/jsPDF/examples/js/html2canvas.js"></script>
+
+            <script>
+
+                var doc = new jsPDF();
+
+                var specialElementHandlers = {
+                    '#header': function(element, renderer){
+                        return true;
+                    }
+                };
+
+
+                $('#btn-pdf').click(function(){
+                    var html=$("#nomina").html();
+                    doc.fromHTML(html,0,0, {
+                        'width': 500,
+                        'elementHandlers': specialElementHandlers
+                    });
+                    doc.save("Test.pdf");
+                });
+
+            </script>
 @endsection

@@ -69,6 +69,9 @@
     <form id="main-form" method="POST" action="{{ route('nomina.store') }}">
         @csrf
 
+        <input name="user_id" value="{{$empleado->id}}" hidden>
+        <input name="dias_nomina" value="{{\App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->num_dias}}" hidden>
+
         <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right">Periodo</label>
             <div id="date-picker" class="col-md-3 input-append date">
@@ -100,7 +103,7 @@
             <label class="col-md-4 col-form-label text-md-right">Descuento por faltas</label>
 
             <div class="col-md-6">
-                <input id="input-descuento-faltas" type="text" class="form-control text-danger" name="monto_faltas" value="" readonly>
+                <input id="input-descuento-faltas" type="text" class="form-control text-danger" name="monto_faltas" value="" disabled readonly>
             </div>
         </div>
 
@@ -108,7 +111,7 @@
             <label class="col-md-4 col-form-label text-md-right">Vacaciones (No. de días)</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-vacaciones" type="text" class="form-control" name="dias_vacaciones" value="Habilite sólo si aplica" readonly>
+                <input id="input-vacaciones" type="text" class="form-control" name="dias_vacaciones" value="Habilite sólo si aplica" disabled>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -121,7 +124,7 @@
                 <label class="col-md-4 col-form-label text-md-right">Monto por vacaciones</label>
 
                 <div class="col-md-6">
-                    <input id="input-monto-vacaciones" type="text" class="form-control" name="monto_vacaciones" value="" readonly>
+                    <input id="input-monto-vacaciones" type="text" class="form-control" name="monto_vacaciones" value="" disabled readonly>
                 </div>
             </div>
 
@@ -129,7 +132,7 @@
                 <label class="col-md-4 col-form-label text-md-right">Prima vacacional</label>
 
                 <div class="col-md-6">
-                    <input id="input-prima-vacacional" type="text" class="form-control" name="monto_primavacacional" value="" readonly>
+                    <input id="input-prima-vacacional" type="text" class="form-control" name="monto_primavacacional" value="" disabled readonly>
                 </div>
             </div>
         </div>
@@ -138,7 +141,7 @@
             <label class="col-md-4 col-form-label text-md-right">Aguinaldo</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-aguinaldo" type="text" class="form-control" name="dias_aguinaldo" value="Habilite sólo si aplica" readonly>
+                <input id="input-aguinaldo" type="text" class="form-control" name="dias_aguinaldo" value="Habilite sólo si aplica" disabled readonly>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -150,7 +153,7 @@
             <label class="col-md-4 col-form-label text-md-right">Monto por aguinaldo</label>
 
             <div class="col-md-6">
-                <input id="input-monto-aguinaldo" type="text" class="form-control" name="monto_aguinaldo" value="" readonly>
+                <input id="input-monto-aguinaldo" type="text" class="form-control" name="monto_aguinaldo" value="" disabled readonly>
             </div>
         </div>
 
@@ -158,7 +161,7 @@
             <label class="col-md-4 col-form-label text-md-right">Utilidades</label>
 
             <div class="col-md-4 pr-md-0">
-                <input id="input-utilidades" type="text" class="float cash form-control" name="monto_utilidades" value="Habilite sólo si aplica" readonly>
+                <input id="input-utilidades" type="text" class="float cash form-control" name="monto_utilidades" value="Habilite sólo si aplica" disabled>
             </div>
 
             <div class="col-md-2 pl-md-0">
@@ -199,7 +202,7 @@
         </div>
 
         <a class="mt-3 mr-3 btn btn-secondary" href="{{ url('admin') }}" role="button">Regresar</a>
-        {!! Form::submit('Generar', ['class' => 'mt-3 btn btn-success']) !!}
+        {!! Form::submit('Generar', ['class' => 'mt-3 btn btn-success', 'id' => 'btn-generar']) !!}
 
         {!! Form::close() !!}
 
@@ -260,7 +263,7 @@ function updateSueldo(){
     if($('#input-monto-aguinaldo').val().length > 0) {
         total_amount += moneyToVar($('#input-monto-aguinaldo').val());
     }
-    if($('#input-utilidades').prop("readonly") == false) {
+    if($('#input-utilidades').prop("disabled") == false) {
         if($('#input-utilidades').val().length > 0) {
             total_amount += moneyToVar($('#input-utilidades').val());
         }
@@ -273,8 +276,8 @@ function updateSueldo(){
 }
 
 function manage_Input(input, btn, hidden_Div, display_Type) {
-    let enabled_Input = !$(input).prop("readonly");
-    $(input).prop("readonly", enabled_Input);
+    let enabled_Input = !$(input).prop("disabled");
+    $(input).prop("disabled", enabled_Input);
     $(input).val( enabled_Input ? "Habilite sólo si aplica" : "");
     $(btn).addClass( enabled_Input ? 'btn-success' : 'btn-danger').removeClass( enabled_Input ? 'btn-danger' : 'btn-success');
     $(btn).text( enabled_Input ? "Habilitar" : "Deshabilitar");
@@ -299,9 +302,11 @@ $('#input-faltas').on( "input", function() {
     if(faltas > 0) {
         $('#div-descuento-faltas').fadeIn('slow');
         $('#div-descuento-faltas').css("display", "flex");
+        $('#input-descuento-faltas').prop("disabled", false);
         $('#input-descuento-faltas').val(toMoney((salario_Diario * faltas)*-1));
     } else {
         $('#input-descuento-faltas').val("");
+        $('#input-descuento-faltas').prop("disabled", true);
         $('#div-descuento-faltas').fadeOut('slow');
     }
     updateSueldo();
@@ -321,35 +326,43 @@ $('#input-vacaciones').on( "input", function() {
 });
 
 $('#input-vacaciones').on( "blur", function() {
-    if($(this).val().trim().length == 0) {
-        $('#btn-vacaciones').click();
-    }
+    sleep(500).then(() => {
+        if($(this).val().trim().length == 0 && $('#btn-vacaciones').text != "Habilitar") {
+            $('#btn-vacaciones').click();
+        }
+    });
 });
 
 $('#input-utilidades').on( "blur", function() {
-    if(moneyToVar($(this).val()) == 0) {
-        $('#btn-utilidades').click();
-    }
+    sleep(500).then(() => {
+        if(moneyToVar($(this).val()) == 0) {
+            $('#btn-utilidades').click();
+        }
+    });
 });
 
 $('#btn-vacaciones').click(function() {
     manage_Input($('#input-vacaciones'), $(this), $('#hidden-vacaciones'), "block");
-    if($('#input-vacaciones').prop("readonly")) {
+    let status = $('#input-vacaciones').prop("disabled");
+    if(status) {
         $('#input-monto-vacaciones').val("");
         $('#input-prima-vacacional').val("");
     }
+    $('#input-monto-vacaciones').prop("disabled", status);
+    $('#input-prima-vacacional').prop("disabled", status);
     updateSueldo();
 });
 
 $('#btn-aguinaldo').click(function() {
     manage_Input($('#input-aguinaldo'), $(this), $('#div-monto-aguinaldo'), "flex");
-    if($('#btn-aguinaldo').text() == "Deshabilitar") {
-        $('#input-aguinaldo').prop("readonly", true);
+    let status = $('#btn-aguinaldo').text() == "Deshabilitar";
+    if(status) {
         $('#input-aguinaldo').val("15 días");
         $('#input-monto-aguinaldo').val(toMoney(salario_Diario * 15));
     } else {
         $('#input-monto-aguinaldo').val("");
     }
+    $('#input-monto-aguinaldo').prop("disabled", !status);
     updateSueldo();
     
 });

@@ -175,5 +175,5 @@ const sleep = (milliseconds) => { //Pausa la ejecucion determinado numero de mil
 /* Usage:
 sleep(500).then(() => {
     Do stuff...
-})
+});
 ***********************************************/

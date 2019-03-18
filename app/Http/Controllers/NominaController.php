@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Nomina;
+use DateTime;
 use Alert;
 class NominaController extends Controller
 {
@@ -43,6 +45,12 @@ class NominaController extends Controller
         }
     }
 
+    private function strMoneyToNum($str) {
+        $num = str_replace("$ ", "", $str);
+        $num = str_replace(",", "", $num);
+        return floatval($num);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -51,8 +59,8 @@ class NominaController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
         $data = $this->validate($request, [
+            'user_id' => 'required',
             'inicio_periodo' => 'required',
             'fin_periodo' => 'required',
             'monto_sueldo' => 'required',
@@ -62,11 +70,67 @@ class NominaController extends Controller
             'monto_totalpago' => 'required',
         ]);
 
-        User::create([
-            'nombres' => $data['nombres'],
+        $data['monto_sueldo'] = $this->strMoneyToNum($request->monto_sueldo);
+        $data['monto_isr'] = $this->strMoneyToNum($request->monto_isr);
+        $data['monto_imss'] = $this->strMoneyToNum($request->monto_imss);
+        $data['monto_cuotasindical'] = $this->strMoneyToNum($request->monto_cuotasindical);
+        $data['monto_totalpago'] = $this->strMoneyToNum($request->monto_totalpago);
+        $data['inicio_periodo'] = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', $data['inicio_periodo']))->format('Y-m-d');
+        $data['fin_periodo'] = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', $data['fin_periodo']))->format('Y-m-d');
+
+        $data['dias_trabajados'] = $request->dias_nomina;
+
+        if($request->dias_faltas != null) {
+            $data['dias_trabajados'] = $request->dias_nomina - $request->dias_faltas;
+            $data['dias_faltas'] = $request->dias_faltas;
+            $data['monto_faltas'] = $this->strMoneyToNum($request->monto_faltas);
+        } else {
+            $data['dias_faltas'] = 0;
+            $data['monto_faltas'] = 0;
+        }
+        if($request->dias_vacaciones != null) {
+            $data['dias_vacaciones'] = $request->dias_vacaciones;
+            $data['monto_vacaciones'] = $this->strMoneyToNum($request->monto_vacaciones);
+            $data['monto_primavacacional'] = $this->strMoneyToNum($request->monto_primavacacional);
+        } else {
+            $data['dias_vacaciones'] = 0;
+            $data['monto_vacaciones'] = 0;
+            $data['monto_primavacacional'] = 0;
+        }
+        if($request->dias_aguinaldo != null) {
+            $data['dias_aguinaldo'] = $request->dias_aguinaldo;
+            $data['monto_aguinaldo'] = $this->strMoneyToNum($request->monto_aguinaldo);
+        } else {
+            $data['dias_aguinaldo'] = 0;
+            $data['monto_aguinaldo'] = 0;
+        }
+        if($request->monto_utilidades != null) {
+            $data['monto_utilidades'] = $this->strMoneyToNum($request->monto_utilidades);
+        } else {
+            $data['monto_utilidades'] = 0;
+        }
+
+        $newNomina = Nomina::create([
+            'user_id' => $data['user_id'],
+            'inicio_periodo' => $data['inicio_periodo'],
+            'fin_periodo' => $data['fin_periodo'],
+            'monto_sueldo' => $data['monto_sueldo'],
+            'monto_isr' => $data['monto_isr'],
+            'monto_imss' => $data['monto_imss'],
+            'monto_cuotasindical' => $data['monto_cuotasindical'],
+            'monto_totalpago' => $data['monto_totalpago'],
+            'dias_trabajados' => $data['dias_trabajados'],
+            'dias_faltas' => $data['dias_faltas'],
+            'monto_faltas' => $data['monto_faltas'],
+            'dias_vacaciones' => $data['dias_vacaciones'],
+            'monto_vacaciones' => $data['monto_vacaciones'],
+            'monto_primavacacional' => $data['monto_primavacacional'],
+            'dias_aguinaldo' => $data['dias_aguinaldo'],
+            'monto_aguinaldo' => $data['monto_aguinaldo'],
+            'monto_utilidades' => $data['monto_utilidades'],
         ]);
         Alert::success('¡ La nomina fue creada exitosamente !')->autoclose(4000);
-        return redirect('nomina.nominas');
+        return redirect('nomina/'.$newNomina->id);
     }
 
     /**

@@ -14,6 +14,11 @@ class Nomina extends Model
         'monto_primavacacional', 'dias_aguinaldo', 'monto_aguinaldo', 'monto_utilidades', 
         'monto_isr', 'monto_imss', 'monto_cuotasindical', 'monto_totalpago'
     ];
+
+    public function empleado()
+    {
+         return $this->belongsTo('App\User', 'user_id', 'id');
+    }
 }
 
 

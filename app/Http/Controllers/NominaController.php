@@ -141,7 +141,8 @@ class NominaController extends Controller
      */
     public function show($id)
     {
-        return view('nomina.ver-nomina');
+        $nomina = Nomina::where('id', $id)->first(); 
+        return view('nomina.ver-nomina')->with('nomina', $nomina);
     }
 
     /**

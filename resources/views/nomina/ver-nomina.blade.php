@@ -16,7 +16,7 @@
                                 </div>
                             </div>
                             <div class="col pl-0">
-                                <span style="font-size: 20px;" class="text-left">Viendo nómina</span>
+                                <span style="font-size: 20px;" class="text-left">Viendo nómina #{{$nomina->id}}</span>
                             </div>
                         </div>
                     </div>
@@ -66,10 +66,10 @@
                                             </div>
                                             <div class="row">
                                                 <div class="pl-0 col-4">
-                                                    <p><span class="text-muted">Folio:</span> #85362</p>
+                                                    <p><span class="text-muted">Folio:</span> #{{$nomina->id}}</p>
                                                 </div>
                                                 <div class="pr-1 col-8 text-left text-lg-right">
-                                                    <p><span class="text-muted">Periodo:</span> 01/05/2016 - 15/05/2016</p>
+                                                    <p><span class="text-muted">Periodo:</span> {{date('d/m/Y',strtotime($nomina->inicio_periodo))}} - {{date('d/m/Y',strtotime($nomina->fin_periodo))}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -82,21 +82,23 @@
                                 <div id="nomina-customer-details" class="row pt-2">
                                     <div class="col-md-7 col-sm-12 text-center text-md-left">
                                         <span class="text-muted">Datos del empleado</span>
+                                        
                                         <ul class="px-0 list-unstyled">
-                                            <li>No. de empleado: 1</li>
-                                            <li>Nombre: Shane Gibson</li>
-                                            <li>CURP: OOVC961111CURP</li>
-                                            <li>RFC: OOVC961111RFC</li>
-                                            <li>RFC: OOVC961111RFC</li>
+                                            <li>No. de empleado: {{$nomina->empleado->id}}</li>
+                                            <li>Nombre: {{$nomina->empleado->nombres.' '.$nomina->empleado->apellidos}}</li>
+                                            <li>CURP: {{$nomina->empleado->curp}}</li>
+                                            <li>RFC: {{$nomina->empleado->rfc}}</li>
+                                            <li>Tipo de contrato: {{ucfirst(strtolower($nomina->empleado->tipo_contrato))}}</li>
+                                            <li>Area: {{$nomina->empleado->area->nombre}}</li>
                                         </ul>
                                     </div>
                                     <div class="pt-4 col-md-5 col-sm-12 text-center text-md-left">
                                         <ul class="px-0 list-unstyled">
-                                            <li>Area: Sistemas</li>
-                                            <li>Puesto: Jefe de area</li>
-                                            <li>Sueldo diario: $ 511.30</li>
-                                            <li>Dias trabajados: 4</li>
-                                            <li>Faltas: 1</li>
+                                            <li>Puesto: {{$nomina->empleado->puesto->nombre}}</li>
+                                            <li>Sueldo diario: <span class="money-format">{{$nomina->empleado->salario_diario}}</span></li>
+                                            <li>Tipo de nómina: {{$nomina->empleado->tiponomina->nombre}}</li>
+                                            <li>Dias trabajados: {{($nomina->dias_trabajados)-($nomina->dias_faltas)}}</li>
+                                            <li>Faltas: {{$nomina->dias_faltas}}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -122,64 +124,111 @@
                                             <div class="table-responsive table-borderless">
                                                 <table class="table">
                                                     <tbody>
+
+                    @php
+                    $vars = \Illuminate\Support\Facades\Schema::getColumnListing('nominas');
+
+                    $percepciones = array();
+                    $suma_percepciones = 0;
+                    $deducciones = array();
+                    $suma_deducciones = 0;
+
+                    foreach($vars as $var) {
+                        if (strpos($var, 'monto_') !== false) {
+                            if($var == 'monto_totalpago' || $nomina->$var == 0) continue;
+
+                            if($nomina->$var > 0) {
+                                $percepciones[$var] = $nomina->$var;
+                                $suma_percepciones += $nomina->$var;
+                            } else {
+                                $deducciones[$var] = $nomina->$var;
+                                $suma_deducciones += $nomina->$var;
+                            }
+                        }
+                    }
+
+                    $keys_percepciones = array_keys($percepciones);
+                    $keys_deducciones = array_keys($deducciones);
+                    
+                    @endphp
+
+
+                    @foreach ($keys_percepciones as $index=>$value)
+
+
                                                         <tr>
-                                                            <th scope="row">1</th>
+                                                            <th scope="row">{{$index+1}}</th>
                                                             <td>
-                                                                <p>Create PSD for mobile APP</p>
+                                                                <p class="fix-name">{{$value}}</p>
                                                             </td>
-                                                            <td class="text-right">$ 2400.00</td>
+                                                            <td class="money-format text-right">{{$percepciones[$value]}}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>
-                                                                <p>Create PSD for mobile APP</p>
-                                                            </td>
-                                                            <td class="text-right">$ 2400.00</td>
-                                                        </tr>
-                                                        
-                                                        <tr class="bg-light">
-                                                            <th scope="row"></th>
-                                                            <td>
-                                                                <h5>Total percepciones</h5>
-                                                            </td>
-                                                            <td class="text-right"><h5>$ 2400.00</h5></td>
-                                                        </tr>
+                    @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
+                                        <div class="col-12 d-flex pb-2 d-md-none">
+                                            <div class="pt-2 pr-0 col-7 text-right">
+                                                <h5>Total percepciones:</h5>
+                                            </div>
+                                            <div class="pt-2 col-5 text-left">
+                                                <h5 class="money-format">{{$suma_percepciones}}</h5>
+                                            </div>
+                                        </div>
                                         <div style="background: #e8e9ea;" class="col-12 d-flex d-md-none">
                                             <div class="pt-2 col-12 text-center">
-                                                <h4 class="text-dark">Deducciones</h3>
+                                                <h4 class="text-dark">Deducciones</h4>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 pr-0">
                                             <div class="table-responsive table-borderless">
                                                 <table class="table">
                                                     <tbody>
+
+                                                        @foreach ($keys_deducciones as $index=>$value)
+
+
                                                         <tr>
-                                                            <th scope="row">1</th>
+                                                            <th scope="row">{{$index+1}}</th>
                                                             <td>
-                                                                <p>Create PSD for mobile APP</p>
+                                                                <p class="fix-name">{{$value}}</p>
                                                             </td>
-                                                            <td class="text-right">$ 2400.00</td>
+                                                            <td class="money-format text-right">{{$deducciones[$value]}}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>
-                                                                <p>Create PSD for mobile APP</p>
-                                                            </td>
-                                                            <td class="text-right">$ 2400.00</td>
-                                                        </tr>
-                                                        <tr class="bg-light">
-                                                            <th scope="row"></th>
-                                                            <td>
-                                                                <h5>Total deducciones</h5>
-                                                            </td>
-                                                            <td class="text-right"><h5>$ 2400.00</h5></td>
-                                                        </tr>
+                    @endforeach
                                                     </tbody>
                                                 </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex d-md-none">
+                                            <div class="pt-2 pr-0 col-6 text-right">
+                                                <h5>Total deducciones:</h5>
+                                            </div>
+                                            <div class="pt-2 col-6 text-left">
+                                                <h5 class="money-format">{{$suma_deducciones}}</h5>
+                                            </div>
+                                    </div>
+                                    <div class="row d-none d-md-flex">
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-7 pr-0 text-right">
+                                                    <h5>Total percepciones:</h5>
+                                                </div>
+                                                <div class="col-5 text-left">
+                                                    <h5 class="money-format">{{$suma_percepciones}}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-7 pr-0 text-right">
+                                                    <h5>Total deducciones:</h5>
+                                                </div>
+                                                <div class="col-5 text-left">
+                                                    <h5 class="money-format">{{$suma_deducciones}}</h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -189,7 +238,7 @@
                                             <h4 class="text-right">Neto pagado:</h4>
                                         </div>
                                         <div class="col-6">
-                                            <h4 class="text-left">$ 5,321.00</h4>
+                                            <h4 class="money-format text-left">{{$nomina->monto_totalpago}}</h4>
                                         </div>
                                 </div>
                                 <hr/>
@@ -198,7 +247,7 @@
                                         <div class="text-center">
                                                 <p>Autorizado por</p>
                                                 <img src="https://cdn.pixabay.com/photo/2014/11/09/08/06/signature-523237__340.jpg" alt="firma-rh" height="100" class="height-100">
-                                                <h6>Shane</h6>
+                                                <h6>Shane Gibson</h6>
                                                 <p class="text-muted">Jefe de recursos humanos</p>
                                         </div>
                                     </div>
@@ -207,7 +256,7 @@
                                                 <p>Firma del empleado</p>
                                                 <div style="height: 66px;"></div>
                                                 <hr/>
-                                                <h6>Henry</h6>
+                                                <h6>{{$nomina->empleado->nombres.' '.$nomina->empleado->apellidos}}</h6>
                                                 <p class="text-muted">Empleado de Shane Corp &copy</p>
                                         </div>
                                     </div>
@@ -232,29 +281,32 @@
         </div>
     </div>
 </div>
-@endsection @section('extra-scripts')
-<script src="../assets/jsPDF/jspdf.debug.js"></script>
-            <script src="../assets/jsPDF/examples/js/html2canvas.js"></script>
-
-            <script>
-
-                var doc = new jsPDF();
-
-                var specialElementHandlers = {
-                    '#header': function(element, renderer){
-                        return true;
-                    }
-                };
-
-
-                $('#btn-pdf').click(function(){
-                    var html=$("#nomina").html();
-                    doc.fromHTML(html,0,0, {
-                        'width': 500,
-                        'elementHandlers': specialElementHandlers
-                    });
-                    doc.save("Test.pdf");
-                });
-
-            </script>
+@endsection 
+@section('extra-scripts')
+<script>
+$(document).ready(function () {
+    $('.money-format').each(function () {
+        let value = parseFloat($(this).html());
+        if(value < 0) {
+            $(this).addClass('text-danger');
+        }
+        $(this).html(toMoney(value));
+    });
+    $('.fix-name').each(function () {
+        let value = $(this).html();
+        switch(value) {
+            case 'monto_sueldo':            $(this).html('Sueldo'); break;
+            case 'monto_isr':               $(this).html('I.S.R'); break;
+            case 'monto_imss':              $(this).html('IMSS'); break;
+            case 'monto_cuotasindical':     $(this).html('Cuota sindical'); break;
+            case 'monto_faltas':            $(this).html('Faltas'); break;
+            case 'monto_vacaciones':        $(this).html('Vacaciones'); break;
+            case 'monto_primavacacional':   $(this).html('Prima vacacional'); break;
+            case 'monto_aguinaldo':         $(this).html('Aguinaldo'); break;
+            case 'monto_utilidades':        $(this).html('Reparto de utilidades'); break;
+            default: break;
+        }
+    });
+});
+</script>
 @endsection

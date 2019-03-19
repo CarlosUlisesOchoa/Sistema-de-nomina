@@ -13,17 +13,17 @@
       <div class="card">
         <div class="card-header pb-3 pt-2">
           <div class="container">
-            <div class="row justify-content-start">
-              <div class="col-1 pl-0">
+            <div class="row">
+              <div id="back-arrow" class="col-1 px-0">
                 <div width="33" height="33" id="" class="fadeimg">
                   <a href="{{url('/empleados')}}">
                     <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
                     <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
-                </a>
-            </div>
-        </div>
-        <div class="col pl-0">
-            <span style="font-size: 20px;" class="text-left">Registrar nuevo empleado</span>
+                  </a>
+                </div>
+              </div>
+              <div class="col-auto pr-0 pl-4 pl-md-3 pl-lg-2 pl-xl-1">
+            <span class="text-left font-size-20">Registrar nuevo empleado</span>
         </div>
     </div>
 </div>
@@ -61,7 +61,7 @@
     <form id="main-form" method="POST" action="{{ route('empleados.store') }}">
         @csrf
 
-        <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp" style="visibility: hidden;">
+        <input type="file" class="form-control-file invisible" name="avatar" id="avatarFile" aria-describedby="fileHelp">
 
         <div class="form-group row">
             <label for="id" class="col-md-4 col-form-label text-md-right">No. de empleado</label>

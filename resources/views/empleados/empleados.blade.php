@@ -10,8 +10,8 @@
       <div class="card">
         <div class="card-header pb-3 pt-2">
           <div class="container">
-            <div class="row justify-content-start">
-              <div class="col-1 pl-0">
+            <div class="row">
+              <div id="back-arrow" class="col-1 px-0">
                 <div width="33" height="33" id="" class="fadeimg">
                   <a href="{{url('/admin')}}">
                     <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
@@ -19,8 +19,8 @@
                   </a>
                 </div>
               </div>
-              <div class="col pl-0">
-                <span style="font-size: 20px;" class="text-left">Gestionar empleados</span>
+              <div class="col-auto pr-0 pl-4 pl-md-3 pl-lg-2 pl-xl-1">
+                <span class="text-left font-size-20">Gestionar empleados</span>
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@
               <tbody>
                 @foreach($users as $user)
 
-                <tr onclick="window.location='{{ url('empleados').'/'.$user->id.'/edit' }}';" style="cursor: pointer;" @if($user->cuenta_activa == false) class="table-secondary" @endif >
+                <tr class="cursor-pointer" onclick="window.location='{{ url('empleados').'/'.$user->id.'/edit' }}';" @if($user->cuenta_activa == false) class="table-secondary" @endif >
 
                   <td>{{$user->id}}</td>
 
@@ -74,7 +74,7 @@
                   <td>Usuario</td>
                   @endif
 
-                  <td width="230"><img id="estado-cuenta" src="{{ asset('images').($user->cuenta_activa ? '/check.png' : '/wrong.png') }} " width="30" class="img" style="display: inline-block;" alt="status"></td>
+                  <td width="230"><img id="estado-cuenta" src="{{ asset('images').($user->cuenta_activa ? '/check.png' : '/wrong.png') }} " width="30" class="img d-inline-block" alt="status"></td>
 
                 </tr>
 

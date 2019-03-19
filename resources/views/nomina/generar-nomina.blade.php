@@ -14,17 +14,17 @@
       <div class="card">
         <div class="card-header pb-3 pt-2">
           <div class="container">
-            <div class="row justify-content-start">
-              <div class="col-1 pl-0">
+            <div class="row">
+              <div id="back-arrow" class="col-1 px-0">
                 <div width="33" height="33" id="" class="fadeimg">
-                    <a href="{{url('/admin')}}">
-                        <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
-                        <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
-                    </a>
+                  <a href="{{url('/admin')}}">
+                    <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
+                    <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
+                  </a>
                 </div>
-            </div>
-            <div class="col pl-0">
-                <span style="font-size: 20px;" class="text-left">Generar nueva nómina</span>
+              </div>
+              <div class="col-auto pr-0 pl-4 pl-md-3 pl-lg-2 pl-xl-1">
+                <span class="text-left font-size-20">Generar nueva nómina</span>
             </div>
         </div>
     </div>
@@ -115,7 +115,7 @@
             </div>
 
             <div class="col-md-2 pl-md-0">
-                <a style="width: 100%" id="btn-vacaciones" class="btn btn-success" href="#!" role="button">Habilitar</a>
+                <a id="btn-vacaciones" class="btn btn-success w-100" href="#!" role="button">Habilitar</a>
             </div>
         </div>
 
@@ -145,7 +145,7 @@
             </div>
 
             <div class="col-md-2 pl-md-0">
-                <a id="btn-aguinaldo" style="width: 100%" class="btn btn-success" href="#!" role="button">Habilitar</a>
+                <a id="btn-aguinaldo" class="btn btn-success w-100" href="#!" role="button">Habilitar</a>
             </div>
         </div>
 
@@ -165,7 +165,7 @@
             </div>
 
             <div class="col-md-2 pl-md-0">
-                <a id="btn-utilidades" style="width: 100%" class="btn btn-success" href="#!" role="button">Habilitar</a>
+                <a id="btn-utilidades" class="btn btn-success w-100" href="#!" role="button">Habilitar</a>
             </div>
         </div>
 

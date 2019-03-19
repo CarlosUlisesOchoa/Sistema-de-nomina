@@ -14,17 +14,17 @@
       <div class="card">
         <div class="card-header pb-3 pt-2">
           <div class="container">
-            <div class="row justify-content-start">
-              <div class="col-1 pl-0">
+            <div class="row">
+              <div id="back-arrow" class="col-1 px-0">
                 <div width="33" height="33" id="" class="fadeimg">
                   <a href="{{url('/empleados')}}">
                     <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
                     <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
-                </a>
-            </div>
-        </div>
-        <div class="col pl-0">
-            <span style="font-size: 20px;" class="text-left">Editar empleado - {{$user->nombres}}</span>
+                  </a>
+                </div>
+              </div>
+              <div class="col-auto pr-0 pl-4 pl-md-3 pl-lg-2 pl-xl-1">
+            <span class="text-left font-size-20">Editar empleado - {{$user->nombres}}</span>
         </div>
     </div>
 </div>
@@ -39,7 +39,7 @@
 
             <div class="profile-header-container">   
                 <div class="profile-header-img">
-                    <img class="mb-2 mx-auto d-block rounded-circle" src="/storage/images/avatars/{{ $user->avatar }}" width="128" id="avatar-actual" style="cursor: pointer;"/>
+                    <img class="mb-2 mx-auto d-block rounded-circle cursor-pointer" src="/storage/images/avatars/{{ $user->avatar }}" width="128" id="avatar-actual"/>
 
                     <!-- badge -->
                     <div class="rank-label-container text-center">
@@ -58,7 +58,7 @@
 
     {!! Form::model($user, ['method' => 'PATCH', 'id' => 'form-userdata', 'enctype' => 'multipart/form-data', 'route' => ['empleados.update', $user->id] ]) !!}
 
-    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp" style="visibility: hidden;">
+    <input type="file" class="form-control-file invisible" name="avatar" id="avatarFile" aria-describedby="fileHelp">
 
     <div class="form-group row">
         <label class="col-md-4 col-form-label text-md-right">No. de empleado</label>

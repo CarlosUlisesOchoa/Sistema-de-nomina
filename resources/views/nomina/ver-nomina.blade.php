@@ -1,22 +1,29 @@
-@extends('layouts.app') @section('title', 'Nómina') @section('extra-css')
-<link href="{{asset('css/nomina.css')}}" rel="stylesheet" type="text/css" /> @endsection @section('content')
+@extends('layouts.app') 
+
+@section('title', 'Nómina') 
+
+@section('extra-css')
+<link href="{{asset('css/nomina.css')}}" rel="stylesheet" type="text/css" /> 
+@endsection 
+
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header pb-3 pt-2">
                     <div class="container">
-                        <div class="row justify-content-start">
-                            <div class="col-1 pl-0">
-                                <div width="33" height="33" id="" class="fadeimg">
-                                    <a href="{{url('/admin')}}">
-                                        <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
-                                        <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col pl-0">
-                                <span style="font-size: 20px;" class="text-left">Viendo nómina #{{$nomina->id}}</span>
+                        <div class="row">
+              <div id="back-arrow" class="col-1 px-0">
+                <div width="33" height="33" id="" class="fadeimg">
+                  <a href="{{url('/admin')}}">
+                    <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
+                    <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
+                  </a>
+                </div>
+              </div>
+              <div class="col-auto pr-0 pl-4 pl-md-3 pl-lg-2 pl-xl-1">
+                                <span class="font-size-20 text-left">Viendo nómina #{{$nomina->id}}</span>
                             </div>
                         </div>
                     </div>
@@ -56,10 +63,10 @@
                                         <div class="pr-0 col-md-5 col-sm-12 text-center text-md-left">
                                             <div class="container">
                                                 <div class="row">
-                                                    <div style="background: #ef1e1e;" class="col-12 border border-danger rounded-left">
+                                                    <div id="bg-title" class="col-12 border border-danger rounded-left">
                                                         <div class="d-flex align-items-center justify-content-center h-100">
                                                             <div class="d-flex flex-column">
-                                                                <h2 style="color: #FFF;" class="text align-self-center p-2">Recibo de nómina</h2>
+                                                                <h2 class="text align-self-center p-2 text-white">Recibo de nómina</h2>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -83,7 +90,7 @@
                                         <div class="col-md-7 col-sm-12 text-center text-md-left">
                                             <span class="text-muted">Datos del empleado</span>
                                             <div class="row">
-                                                <div class="col-4 pr-0" style="flex-basis: 24.33%;">
+                                                <div id="employeer-data" class="col-4 pr-0">
                                                     <ul class="px-0 list-unstyled">
                                                         <li>No. de empleado:</li>
                                                         <li>Nombre:</li>
@@ -130,7 +137,7 @@
                                         </div>
                                     </div>
 
-                                    <div style="background: #e8e9ea;" class="row text-center d-none d-md-flex">
+                                    <div class="row text-center d-none d-md-flex bg-per-dec">
                                         <div class="pt-2 col-6">
                                             <h4 class="text-dark">Percepciones</h3>
                                     </div>
@@ -139,7 +146,7 @@
                                     </div>
                                 </div>
 
-                                <div style="background: #e8e9ea;" class="row text-center d-flex d-md-none">
+                                <div class="row text-center d-flex d-md-none bg-per-dec">
                                     <div class="pt-2 col-12">
                                         <h4 class="text-dark">Percepciones</h3>
                                     </div>
@@ -201,7 +208,7 @@
                                                 <h5 class="money-format">{{$suma_percepciones}}</h5>
                                             </div>
                                         </div>
-                                        <div style="background: #e8e9ea;" class="col-12 d-flex d-md-none">
+                                        <div class="col-12 d-flex d-md-none bg-per-dec">
                                             <div class="pt-2 col-12 text-center">
                                                 <h4 class="text-dark">Deducciones</h4>
                                         </div>
@@ -278,7 +285,7 @@
                                     <div class="offset-4 col-4 justify-content-end">
                                         <div class="text-center">
                                             <p>Firma del empleado</p>
-                                            <div style="height: 66px;"></div>
+                                            <div id="employeer-signature"></div>
                                             <hr/>
                                             <h6>{{$nomina->empleado->nombres.' '.$nomina->empleado->apellidos}}</h6>
                                             <p class="text-muted">Empleado de Shane Corp &copy</p>

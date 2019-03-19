@@ -10,17 +10,17 @@
       <div class="card">
         <div class="card-header pb-3 pt-2">
           <div class="container">
-            <div class="row justify-content-start">
-              <div class="col-1 pl-0">
+            <div class="row">
+              <div id="back-arrow" class="col-1 px-0">
                 <div width="33" height="33" id="" class="fadeimg">
                   <a href="{{url('/puestos')}}">
                     <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
                     <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
-                </a>
-            </div>
-        </div>
-        <div class="col pl-0">
-            <span style="font-size: 20px;" class="text-left">Registrar nuevo puesto</span>
+                  </a>
+                </div>
+              </div>
+              <div class="col-auto pr-0 pl-4 pl-md-3 pl-lg-2 pl-xl-1">
+            <span class="text-left font-size-20">Registrar nuevo puesto</span>
         </div>
     </div>
 </div>

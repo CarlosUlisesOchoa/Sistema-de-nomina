@@ -32,7 +32,7 @@
         </ul>
         <ul class="navbar-nav">
           @auth 
-          <span class="navbar-text" style="color: #ffffff;">
+          <span class="navbar-text text-white">
             {{ Auth::user()->nombres }} 
             @if (Auth::user()->isAdmin()) 
             <span class="text-danger"><b>(Admin)</b></span> 
@@ -45,7 +45,7 @@
              <a class="dropdown-item" href="{{ route('admin') }}">Panel admin</a> 
              @endif 
              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar sesión</a>
-             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+             <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
                @csrf
              </form>
            </div>

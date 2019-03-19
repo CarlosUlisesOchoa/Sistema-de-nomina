@@ -23,7 +23,7 @@ class NominaController extends Controller
     public function listaNominas()
     {
         $nominas = Nomina::all();
-        return view('nomina.nominas', compact('nominas'))->with(array('MsgType' => 'info', 'Msg' => 'Info: Haga clic sobre alguna fila si desea consultar la información completa y/o editar algún dato.'));
+        return view('nomina.listado-nominas', compact('nominas'))->with(array('MsgType' => 'info', 'Msg' => 'Info: Haga clic sobre alguna fila si desea consultar la información completa y/o editar algún dato.'));
     }
 
     /**

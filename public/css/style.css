@@ -12,6 +12,18 @@ body{
 	margin-right:50px;
 }
 
+#back-arrow {
+  flex-basis: 5.33333%;
+}
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .inside-col {
   width: 100%; 
   border:none; 

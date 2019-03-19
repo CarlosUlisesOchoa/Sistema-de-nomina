@@ -138,7 +138,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-md-4 col-form-label text-md-right">Aguinaldo</label>
+            <label class="col-md-4 col-form-label text-md-right">Aguinaldo (No. de días)</label>
 
             <div class="col-md-4 pr-md-0">
                 <input id="input-aguinaldo" type="text" class="form-control" name="dias_aguinaldo" value="Habilite sólo si aplica" disabled readonly>
@@ -259,6 +259,7 @@ function updateSueldo(){
     }
     if($('#input-monto-vacaciones').val().length > 0) {
         total_amount += moneyToVar($('#input-monto-vacaciones').val());
+        total_amount += moneyToVar($('#input-prima-vacacional').val());
     }
     if($('#input-monto-aguinaldo').val().length > 0) {
         total_amount += moneyToVar($('#input-monto-aguinaldo').val());
@@ -357,7 +358,7 @@ $('#btn-aguinaldo').click(function() {
     manage_Input($('#input-aguinaldo'), $(this), $('#div-monto-aguinaldo'), "flex");
     let status = $('#btn-aguinaldo').text() == "Deshabilitar";
     if(status) {
-        $('#input-aguinaldo').val("15 días");
+        $('#input-aguinaldo').val("15");
         $('#input-monto-aguinaldo').val(toMoney(salario_Diario * 15));
     } else {
         $('#input-monto-aguinaldo').val("");

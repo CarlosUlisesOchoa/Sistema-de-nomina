@@ -2,6 +2,10 @@
 
 @section('title', 'Gestión de nóminas')
 
+@section('extra-css')
+<link href="{{asset('css/paysheet-list.css')}}" rel="stylesheet" type="text/css" /> 
+@endsection 
+
 @section('content')
 
 <div class="container">
@@ -29,7 +33,36 @@
         <div class="card-body">
 
 
-          <button id="btn-GenerarNomina" class="mb-3 btn btn-success" role="button">Crear una nueva nómina</button>
+          <div class="row mb-3">
+            <div class="col-12 col-md-2 text-center mt-1">
+                  <span>Filtrar por:</span>
+            </div>
+            <div class="col-10 px-0 mx-0">
+              <div class="row justify-content-start">
+                <div class="col-xs-12 pb-2 col-md-6 col-lg-4 col-xl-2 pb-xl-0">
+                  <button class="btn btn-primary w-100" role="button">Folio</button>
+                </div>
+                <div class="col-xs-12 pb-2 col-md-6 col-lg-4 col-xl-3 pb-xl-0">
+                  <button class="btn btn-primary w-100" role="button">No. Empleado</button>
+                </div>
+                <div class="col-xs-12 pb-2 col-md-6 col-lg-4 col-xl-3 pb-xl-0">
+                  <button class="btn btn-primary w-100" role="button">Nombre empleado</button>
+                </div>
+                <div class="col-xs-12 pb-2 col-md-6 col-lg-4 col-xl-2 pb-xl-0">
+                  <button class="btn btn-primary w-100" role="button">Periodo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row justify-content-center mt-4 mb-4">
+              <label class="col-md-3 col-form-label text-md-right">Ingrese el filtro:</label>
+
+              <div class="col-md-4">
+                  <input id="cta_bancaria" name="cta_bancaria" type="text" class="digits-only form-control" value="" requiered>
+              </div>
+          </div>
+          
 
           <div class="table-responsive">
 

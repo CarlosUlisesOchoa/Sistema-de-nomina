@@ -33,8 +33,8 @@
         <div class="card-body">
 
 
-          <div class="row mb-3">
-            <div class="col-12 col-md-2 text-center mt-1">
+          <div class="row mb-3 justify-content-center">
+            <div class="col-12 col-md-2 text-center mt-1 mb-2">
                   <span>Filtrar por:</span>
             </div>
             <div class="col-10 px-0 mx-0">
@@ -56,7 +56,7 @@
           </div>
 
           <div class="form-group row justify-content-center mt-4 mb-4">
-              <label class="col-md-3 col-form-label text-md-right">Ingrese el filtro:</label>
+              <label class="col-md-3 col-form-label text-center text-md-right">Ingrese el filtro:</label>
 
               <div class="col-md-4">
                   <input id="cta_bancaria" name="cta_bancaria" type="text" class="digits-only form-control" value="" requiered>
@@ -66,7 +66,7 @@
 
           <div class="table-responsive">
 
-            <table class="table table-hover text-center">
+            <table class="table table-hover text-center text-nowrap">
 
               <thead>
 
@@ -74,9 +74,9 @@
 
                 <th>No. Empleado</th>
 
-                <th>Nombres</th>
+                <th class="d-none d-md-table-cell">Nombres</th>
 
-                <th>Apellidos</th>
+                <th class="d-none d-md-table-cell">Apellidos</th>
 
                 <th>Periodo</th>
 
@@ -92,9 +92,9 @@
 
                   <td>{{$nomina->empleado->id}}</td>
 
-                  <td>{{$nomina->empleado->nombres}}</td>
+                  <td class="d-none d-md-table-cell">{{$nomina->empleado->nombres}}</td>
 
-                  <td>{{$nomina->empleado->apellidos}}</td>
+                  <td class="d-none d-md-table-cell">{{$nomina->empleado->apellidos}}</td>
 
                   <td>{{date('d/m/Y',strtotime($nomina->inicio_periodo))}} - {{date('d/m/Y',strtotime($nomina->fin_periodo))}}</td>
 
@@ -136,15 +136,16 @@ function managePaysheet(id) {
   swal("¿Qué desea hacer?", {
   buttons: {
     cancel: "Cancelar",
-    ver: {
-      text: "Solo ver",
-      value: "ver",
-    },
     editar: {
       text: "Editar",
       value: "editar",
     },
+    ver: {
+      text: "Solo ver",
+      value: "ver",
+    },
   },
+  icon: "{{asset('images/money.png')}}",
 })
 .then((value) => {
   switch (value) {

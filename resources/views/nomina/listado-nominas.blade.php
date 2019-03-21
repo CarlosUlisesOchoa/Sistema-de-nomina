@@ -40,33 +40,33 @@
             <div class="col-10 px-0 mx-0">
               <div class="row justify-content-start">
                 <div class="col-xs-12 pb-2 col-md-6 col-lg-4 col-xl-2 pb-xl-0">
-                  <button class="btn btn-primary w-100" role="button">Folio</button>
+                  <button id="btn-0" class="btn btn-primary w-100 filtro" role="button">Folio</button>
                 </div>
                 <div class="col-xs-12 pb-2 col-md-6 col-lg-4 col-xl-3 pb-xl-0">
-                  <button class="btn btn-primary w-100" role="button">No. Empleado</button>
+                  <button id="btn-1" class="btn btn-primary w-100 filtro" role="button">No. Empleado</button>
                 </div>
                 <div class="col-xs-12 pb-2 col-md-6 col-lg-4 col-xl-3 pb-xl-0">
-                  <button class="btn btn-primary w-100" role="button">Nombre empleado</button>
+                  <button id="btn-2" class="btn btn-primary w-100 filtro" role="button">Nombre empleado</button>
                 </div>
                 <div class="col-xs-12 pb-2 col-md-6 col-lg-4 col-xl-2 pb-xl-0">
-                  <button class="btn btn-primary w-100" role="button">Periodo</button>
+                  <button id="btn-4" class="btn btn-primary w-100 filtro" role="button">Periodo</button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="form-group row justify-content-center mt-4 mb-4">
-              <label class="col-md-3 col-form-label text-center text-md-right">Ingrese el filtro:</label>
+          <div id="div-filtrador" class="form-group row justify-content-center mt-4 mb-4 display-none">
+              <label class="col-md-6 col-lg-4 col-form-label text-center text-md-right">Ingrese el filtro:</label>
 
-              <div class="col-md-4">
-                  <input id="cta_bancaria" name="cta_bancaria" type="text" class="digits-only form-control" value="" requiered>
+              <div class="col-12 col-md-6 col-lg-4">
+                  <input id="unused" type="text" class="form-control filtrar-tabla" value="" disabled>
               </div>
           </div>
           
 
           <div class="table-responsive">
 
-            <table class="table table-hover text-center text-nowrap">
+            <table id="tabla-nominas" class="table table-hover text-center text-nowrap">
 
               <thead>
 
@@ -103,7 +103,6 @@
                 @endforeach
 
               </tbody>
-
             </table>
           </div>
         </div>
@@ -130,6 +129,47 @@ $('#btn-GenerarNomina').click(function() {
         window.location.replace("{{ url('nomina').'/generar/'}}" + value);
       }
     });
+});
+
+function manageInput(div, btnFiltro) {
+    let enabled_Input = !$(div).find('input').prop('disabled');
+    let newId = btnFiltro.attr('id').replace('btn-', '');
+    let text = btnFiltro.html();
+    if(enabled_Input && (newId == $(div).find('input').attr('id'))) { // Si está habilitado
+        $(div).slideUp('slow');
+        $(div).find('input').attr('id', 'unused');
+        $(div).find('input').prop("disabled", true);
+    } else {
+        $(div).slideDown('slow');
+        $(div).css("display", "flex");
+        $(div).find('input').attr('id', newId);
+        $(div).find('label').html('Ingrese el ' + text + ':');
+        $(div).find('input').prop("disabled", false);
+        $(div).find('input').focus();
+    }
+}
+
+$('.filtro').click(function() {
+    manageInput($('#div-filtrador'), $(this));   
+});
+
+$(".filtrar-tabla").keyup(function() {
+  // var rows = $("#tabla-nominas").find("tr").hide();
+  // var data = this.value.split(" ");
+  // $.each(data, function(i, v) {
+  //   rows.filter(":contains('" + v + "')").show();
+  // });
+  let col_Id = $(this).attr('id');
+  let rex = new RegExp($(this).val(), 'i');
+  // var $t = $(this).children(":eq(4))");
+  $('#tabla-nominas tbody tr ').hide();
+
+  //Recusively filter the jquery object to get results.
+  $('#tabla-nominas tbody tr ').filter(function(i, v) {
+    //Get the 3rd column object here which is userNamecolumn
+      var $t = $(this).children(":eq(" + col_Id + ")");
+      return rex.test($t.text());
+  }).show();
 });
 
 function managePaysheet(id) {

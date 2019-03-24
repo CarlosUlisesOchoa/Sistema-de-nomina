@@ -338,7 +338,7 @@
          if(fileName != '') {
 
             $('#avatar-up-info').hide();
-            document.getElementById("avatar-new-info").style.display = "block";
+            $("avatar-new-info").css("display", "block");
         }
         else {
             $('#avatar-new-info').fadeOut(500);

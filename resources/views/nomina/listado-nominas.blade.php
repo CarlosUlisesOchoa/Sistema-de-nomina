@@ -133,6 +133,8 @@ $('#btn-GenerarNomina').click(function() {
 
 function applyRules(input, id) {
   input.attr('class', 'form-control filtrar-tabla');
+  input.val('');
+  $(".filtrar-tabla").keyup();
   switch(id) {
     case '0': 
     case '1': input.addClass('digits-only'); break;

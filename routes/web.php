@@ -20,43 +20,34 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/mi-perfil', 'HomeController@profile')->name('profile');
+
+Route::patch('/actualizar-perfil', 'HomeController@updateProfile')->name('update-profile');
+
 /* Admin system */
 Route::get('/admin', 'AdminController@admin')    
-    ->middleware('is_admin')    
     ->name('admin');
 
-Route::get('/empleados/{id}/baja', 'EmpleadosController@darBaja')    
-    ->middleware('is_admin');
+Route::get('/empleados/{id}/baja', 'EmpleadosController@darBaja');
 
-Route::get('/empleados/{id}/reactivacion', 'EmpleadosController@reactivar')    
-    ->middleware('is_admin');
+Route::get('/empleados/{id}/reactivacion', 'EmpleadosController@reactivar');
 
-Route::resource('empleados', 'EmpleadosController')    
-    ->middleware('is_admin');
+Route::resource('empleados', 'EmpleadosController');
 
-Route::get('/areas/{id}/borrar', 'AreasController@delete')    
-    ->middleware('is_admin');
+Route::get('/areas/{id}/borrar', 'AreasController@delete');
 
-Route::resource('areas', 'AreasController')    
-    ->middleware('is_admin');
+Route::resource('areas', 'AreasController');
 
-Route::get('/puestos/{id}/borrar', 'PuestosController@delete')    
-    ->middleware('is_admin');
+Route::get('/puestos/{id}/borrar', 'PuestosController@delete');
 
-Route::resource('puestos', 'PuestosController')    
-    ->middleware('is_admin');
+Route::resource('puestos', 'PuestosController');
 
-Route::get('/tipos-nomina/{id}/borrar', 'TiposNominaController@delete')    
-    ->middleware('is_admin');
+Route::get('/tipos-nomina/{id}/borrar', 'TiposNominaController@delete');
 
-Route::resource('tipos-nomina', 'TiposNominaController')    
-    ->middleware('is_admin');
+Route::resource('tipos-nomina', 'TiposNominaController');
 
-Route::get('/nomina/{id}/borrar', 'NominaController@delete')    
-    ->middleware('is_admin');
+Route::get('/nomina/{id}/borrar', 'NominaController@delete');
 
-Route::get('/nomina/generar/{id_Empleado}', 'NominaController@generar')    
-    ->middleware('is_admin');
+Route::get('/nomina/generar/{id_Empleado}', 'NominaController@generar');
 
-Route::resource('nomina', 'NominaController')    
-    ->middleware('is_admin');
+Route::resource('nomina', 'NominaController');

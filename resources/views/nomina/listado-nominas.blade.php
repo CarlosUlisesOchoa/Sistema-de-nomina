@@ -131,10 +131,22 @@ $('#btn-GenerarNomina').click(function() {
     });
 });
 
+function applyRules(input, id) {
+  input.attr('class', 'form-control filtrar-tabla');
+  switch(id) {
+    case '0': 
+    case '1': input.addClass('digits-only'); break;
+    case '2': input.addClass('letters-space name'); break;
+    case '3':
+    default: break;
+  }
+}
+
 function manageInput(div, btnFiltro) {
     let enabled_Input = !$(div).find('input').prop('disabled');
     let newId = btnFiltro.attr('id').replace('btn-', '');
     let text = btnFiltro.html();
+    applyRules($(div).find('input'), newId);
     if(enabled_Input && (newId == $(div).find('input').attr('id'))) { // Si está habilitado
         $(div).slideUp('slow');
         $(div).find('input').attr('id', 'unused');
@@ -185,7 +197,7 @@ function managePaysheet(id) {
       value: "ver",
     },
   },
-  icon: "{{asset('images/money.png')}}",
+  icon: "{{asset('images/quest.png')}}",
 })
 .then((value) => {
   switch (value) {

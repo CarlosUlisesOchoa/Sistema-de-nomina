@@ -313,6 +313,7 @@
 </div>
 </div>
 @endsection @section('extra-scripts')
+<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.money-format').each(function() {
@@ -355,6 +356,15 @@
                 default:
                     break;
             }
+        });
+    });
+    $('#btn-pdf').on('click', function() {
+        html2canvas(document.querySelector("#nomina")).then(canvas => {
+            a = document.createElement('a'); 
+            document.body.appendChild(a); 
+            a.download = "nomina #" + "{{$nomina->id}}" + ".png"; 
+            a.href =  canvas.toDataURL();
+            a.click();
         });
     });
 </script>

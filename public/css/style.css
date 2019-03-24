@@ -78,3 +78,19 @@ body{
 .fadeimg img.top:hover {
   opacity:0;
 }
+
+.swal-button:active {
+    background-color: #026684;
+}
+
+.swal-button--cancel {
+    color: #fff;
+    background-color: #ff3636 !important;
+} 
+.swal-button--cancel:active {
+    background-color: #d71818 !important;
+}
+
+.swal-button {
+    background-color: #039cca;
+}

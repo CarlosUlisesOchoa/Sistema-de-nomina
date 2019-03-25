@@ -14,7 +14,7 @@
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
 
-    <title>{{ config('app.name', 'Laravel') }} @if(Route::currentRouteName() != '') - @yield('title') @endif</title>
+    <title>{{ config('app.name', 'Laravel') }} @if(Request::url() != '') - @yield('title') @endif</title>
 
 </head>
 

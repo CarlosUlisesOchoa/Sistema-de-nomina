@@ -25,8 +25,7 @@ Route::get('/mi-perfil', 'HomeController@profile')->name('profile');
 Route::patch('/actualizar-perfil', 'HomeController@updateProfile')->name('update-profile');
 
 /* Admin system */
-Route::get('/admin', 'AdminController@admin')    
-    ->name('admin');
+Route::get('/admin', 'AdminController@admin')->name('admin');
 
 Route::get('/empleados/{id}/baja', 'EmpleadosController@darBaja');
 
@@ -45,6 +44,10 @@ Route::resource('puestos', 'PuestosController');
 Route::get('/tipos-nomina/{id}/borrar', 'TiposNominaController@delete');
 
 Route::resource('tipos-nomina', 'TiposNominaController');
+
+Route::get('/tipos-contrato/{id}/borrar', 'TiposContratoController@delete');
+
+Route::resource('tipos-contrato', 'TiposContratoController');
 
 Route::get('/nomina/{id}/borrar', 'NominaController@delete');
 

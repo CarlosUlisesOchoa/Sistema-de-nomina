@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('cta_bancaria')->nullable();
             $table->float('salario_diario');
             $table->string('dias_descanso');
-            $table->enum('tipo_contrato', ['HONORARIOS', 'BASE', 'INTERINO']);
+            $table->integer('id_tipocontrato')->unsigned();
             $table->integer('id_puesto')->unsigned();
             $table->integer('id_area')->unsigned();
             $table->integer('id_tiponomina')->unsigned();
@@ -43,6 +43,8 @@ class CreateUsersTable extends Migration
             $table->foreign('id_area')->references('id')->on('areas');
 
             $table->foreign('id_tiponomina')->references('id')->on('tiposnomina');
+
+            $table->foreign('id_tipocontrato')->references('id')->on('tiposcontrato');
 
         });
 
@@ -60,7 +62,7 @@ class CreateUsersTable extends Migration
             'cta_bancaria' => '4653268850',
             'salario_diario' => '511.3',
             'dias_descanso' => '2',
-            'tipo_contrato' => 'BASE',
+            'id_tipocontrato' => '1',
             'id_puesto' => '1',
             'id_area' => '1',
             'id_tiponomina' => '1'
@@ -82,7 +84,7 @@ class CreateUsersTable extends Migration
             'cta_bancaria' => '4653268850',
             'salario_diario' => '511.3',
             'dias_descanso' => '2',
-            'tipo_contrato' => 'BASE',
+            'id_tipocontrato' => '1',
             'id_puesto' => '1',
             'id_area' => '1',
             'id_tiponomina' => '1'

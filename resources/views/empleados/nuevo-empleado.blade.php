@@ -227,11 +227,11 @@
                 <label class="col-md-4 col-form-label text-md-right">Contrato</label>
 
                 <div class="col-md-6">
-                    <select id='tipo_contrato' name='tipo_contrato' class="form-control">
+                    <select id='id_tipocontrato' name='id_tipocontrato' class="form-control">
 
-                        @foreach(\App\User::getOpciones('tipo_contrato') as $index => $tipo_contrato )
+                        @foreach(\App\TiposContrato::all() as $tipocontrato)
 
-                        <option value="{{$index+1}}">{{$tipo_contrato}}</option>
+                        <option value="{{$tipocontrato->id}}">{{$tipocontrato->nombre}}</option>
 
                         @endforeach
 

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\TiposNomina;
+use App\TiposContrato;
 use Alert;
 
-class TiposNominaController extends Controller
+class TiposContratoController extends Controller
 {
     public function __construct()
     {
@@ -21,14 +21,14 @@ class TiposNominaController extends Controller
      */
     public function index()
     {
-        return $this->listaTiposNomina();
+        return $this->listaTiposContrato();
     }
 
 
-    public function listaTiposNomina()
+    public function listaTiposContrato()
     {
-        $tipos_nomina = TiposNomina::all();
-        return view('tipos-nomina.tipos-nomina', compact('tipos_nomina'))->with(array('MsgType' => 'info', 'Msg' => 'Info: Haga clic sobre alguna fila si desea editar algun tipo de nómina'));
+        $tipos_contrato = TiposContrato::all();
+        return view('tipos-contrato.tipos-contrato', compact('tipos_contrato'))->with(array('MsgType' => 'info', 'Msg' => 'Info: Haga clic sobre alguna fila si desea editar algun tipo de contrato'));
     }
 
     /**
@@ -38,7 +38,7 @@ class TiposNominaController extends Controller
      */
     public function create()
     {
-        return view('tipos-nomina.nuevo-tiponomina');
+        return view('tipos-contrato.nuevo-tipocontrato');
     }
 
     /**
@@ -51,15 +51,13 @@ class TiposNominaController extends Controller
     {
         $data = $this->validate($request, [
             'nombre' => 'required',
-            'num_dias' => 'required',
         ]);
 
-        TiposNomina::create([
+        TiposContrato::create([
             'nombre' => $data['nombre'],
-            'num_dias' => $data['num_dias'],
         ]);
-        Alert::success('¡ El nuevo tipo de nómina fue registrado exitosamente !')->autoclose(4000);
-        return redirect('tipos-nomina');
+        Alert::success('¡ El nuevo tipo de contrato fue registrado exitosamente !')->autoclose(4000);
+        return redirect('tipos-contrato');
     }
 
     /**
@@ -70,8 +68,8 @@ class TiposNominaController extends Controller
      */
     public function edit($id=null)
     {
-        $tipo_nomina = TiposNomina::where('id', $id)->first();
-        return view('tipos-nomina.editar-tiponomina')->with('tipo_nomina', $tipo_nomina);
+        $tipo_contrato = TiposContrato::where('id', $id)->first();
+        return view('tipos-contrato.editar-tipocontrato')->with('tipo_contrato', $tipo_contrato);
     }
 
     /**
@@ -86,16 +84,15 @@ class TiposNominaController extends Controller
         $data = $this->validate($request, [
             'id' => 'required',
             'nombre' => 'required',
-            'num_dias' => 'required',
         ]);
 
         try {
-            DB::table('tiposnomina')->where('id','=', $id)->update($data);
+            DB::table('tiposcontrato')->where('id','=', $id)->update($data);
             Alert::success('¡ Datos guardados exitosamente !')->autoclose(4000);
         } catch (\Illuminate\Database\QueryException $e) {
         Alert::error('Ocurrio un problema al intentar guardar los datos, intente más tarde '.$e, 'Error fatal')->persistent("Close");
         }
-        return redirect('tipos-nomina');
+        return redirect('tipos-contrato');
     }
 
 
@@ -108,11 +105,11 @@ class TiposNominaController extends Controller
     public function delete($id)
     {
         try {
-            DB::table('tiposnomina')->where('id','=', $id)->delete();
-            Alert::success('¡ El tipo de nómina se ha eliminado exitosamente !')->autoclose(4000);
+            DB::table('tiposcontrato')->where('id','=', $id)->delete();
+            Alert::success('¡ El tipo de contrato se ha eliminado exitosamente !')->autoclose(4000);
         } catch (\Illuminate\Database\QueryException $e) {
-            Alert::error('Ocurrio un problema al intentar eliminar el tipo de nómina, intente más tarde '.$e, 'Error fatal')->persistent("Close");
+            Alert::error('Ocurrio un problema al intentar eliminar el tipo de contrato, intente más tarde '.$e, 'Error fatal')->persistent("Close");
         }
-        return redirect('tipos-nomina');
+        return redirect('tipos-contrato');
     }
 }

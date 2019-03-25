@@ -40,11 +40,11 @@ class NominaController extends Controller
     public function generar($id_Empleado)
     {
         $empleado = User::where('id', $id_Empleado)->first();
+        if($empleado != null) {
         $dias_nomina = \App\TiposNomina::where('id', $empleado->id_tiponomina)->first()->num_dias;
         $sueldo = ($empleado->salario_diario * $dias_nomina);
         $isr = \App\ISR::where('lim_inferior', '<=', $sueldo)->where('lim_superior', '>=', $sueldo)->where('frecuencia_pago', $dias_nomina)->get()->first()->porcentaje;
-        if($empleado != null) {
-            return view('nomina.generar-nomina')->with('empleado', $empleado)->with('isr', $isr);
+        return view('nomina.generar-nomina')->with('empleado', $empleado)->with('isr', $isr);
         } else {
             Alert::error('El número de empleado que acaba de ingresar no fue encontrado', 'Error')->autoclose(6000);
             return redirect('admin');
@@ -116,6 +116,26 @@ class NominaController extends Controller
             $data['monto_utilidades'] = 0;
         }
 
+        $suma_percepciones = 0;
+        $suma_deducciones = 0;
+
+        foreach($data as $index => $var) {
+            if (strpos($index, 'monto_') !== false) {
+                if($index == 'monto_totalpago' || $data[$index] == 0) {
+                    continue;    
+                } 
+
+                if($data[$index] > 0) {
+                    $suma_percepciones += $data[$index];
+                } else {
+                    $suma_deducciones += $data[$index];
+                }
+            }
+        }
+
+        $data['monto_percepciones'] = $suma_percepciones;
+        $data['monto_deducciones'] = $suma_deducciones;
+
         $newNomina = Nomina::create([
             'user_id' => $data['user_id'],
             'inicio_periodo' => $data['inicio_periodo'],
@@ -134,6 +154,8 @@ class NominaController extends Controller
             'dias_aguinaldo' => $data['dias_aguinaldo'],
             'monto_aguinaldo' => $data['monto_aguinaldo'],
             'monto_utilidades' => $data['monto_utilidades'],
+            'monto_percepciones' => $data['monto_percepciones'],
+            'monto_deducciones' => $data['monto_deducciones'],
         ]);
         Alert::success('¡ La nomina fue creada exitosamente !')->autoclose(4000);
         return redirect('nomina/'.$newNomina->id);

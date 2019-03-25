@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header pb-3 pt-2">
           <div class="container">
@@ -33,7 +33,7 @@
 
           <div class="table-responsive">
 
-            <table class="table table-hover text-center">
+            <table class="table table-hover text-center text-nowrap">
 
               <thead>
 
@@ -43,9 +43,17 @@
 
                 <th>Apellidos</th>
 
-                <th>Puesto</th>
+                <th>Fecha de nacimiento</th>
 
-                <th>Area</th>
+                <th>Género</th>
+
+                <th>Estado civil</th>
+
+                <th>CURP</th>
+
+                <th>RFC</th>
+
+                <th>Domicilio</th>
 
                 <th>Tipo de cuenta</th>
 
@@ -64,9 +72,17 @@
 
                   <td>{{$user->apellidos}}</td>
 
-                  <td>{{$user->puesto->nombre}}</td>
+                  <td>{{date('d/m/Y',strtotime($user->fec_nac))}}</td>
 
-                  <td>{{$user->area->nombre}}</td>
+                  <td>{{ucfirst(strtolower($user->genero))}}</td>
+
+                  <td>{{ucfirst(strtolower($user->estado_civil))}}</td>
+
+                  <td>{{$user->curp}}</td>
+
+                  <td>{{$user->rfc}}</td>
+
+                  <td>{{$user->domicilio}}</td>
 
                   @if($user->tipo_cuenta == 'ADMIN')
                   <td><b><p class="text-danger">Administrador</p></b></td>

@@ -40,7 +40,7 @@ class User extends Authenticatable
         'cta_bancaria',
         'salario_diario',
         'dias_descanso',
-        'tipo_contrato',
+        'id_tipocontrato',
         'id_puesto',
         'id_area',
         'id_tiponomina'
@@ -68,6 +68,11 @@ class User extends Authenticatable
     public function tiponomina()
     {
          return $this->belongsTo('App\TiposNomina', 'id_tiponomina', 'id');
+    }
+
+    public function tipocontrato()
+    {
+         return $this->belongsTo('App\TiposContrato', 'id_tipocontrato', 'id');
     }
 
     public function nominas()

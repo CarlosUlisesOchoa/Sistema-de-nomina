@@ -11,14 +11,6 @@
         <div class="card-header pb-3 pt-2">
           <div class="container">
             <div class="row">
-              <div id="back-arrow" class="col-1 px-0">
-                <div width="33" height="33" id="" class="fadeimg">
-                  <a href="{{url('/empleados')}}">
-                    <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
-                    <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
-                  </a>
-                </div>
-              </div>
               <div class="col-auto pr-0 pl-4 pl-md-3 pl-lg-2 pl-xl-1">
             <span class="text-left font-size-20">Perfil de {{$user->nombres}}</span>
         </div>
@@ -240,7 +232,7 @@
             <label class="col-md-4 col-form-label text-md-right">Contrato</label>
 
             <div class="col-md-6">
-        <input class="form-control" value="{{ucfirst(strtolower($user->tipo_contrato))}}" disabled>
+        <input class="form-control" value="{{$user->tipocontrato->nombre}}" disabled>
     </div>
         </div>
 
@@ -248,7 +240,7 @@
             <label class="col-md-4 col-form-label text-md-right">Puesto</label>
 
             <div class="col-md-6">
-        <input class="form-control" value="{{ucfirst(strtolower($user->puesto->nombre))}}" disabled>
+        <input class="form-control" value="{{$user->puesto->nombre}}" disabled>
     </div>
         </div>
 
@@ -256,7 +248,7 @@
             <label class="col-md-4 col-form-label text-md-right">Area</label>
 
             <div class="col-md-6">
-        <input class="form-control" value="{{ucfirst(strtolower($user->area->nombre))}}" disabled>
+        <input class="form-control" value="{{$user->area->nombre}}" disabled>
     </div>
         </div>
 
@@ -264,7 +256,7 @@
             <label class="col-md-4 col-form-label text-md-right">Tipo de nómina</label>
 
             <div class="col-md-6">
-        <input class="form-control" value="{{ucfirst(strtolower($user->tiponomina->nombre))}}" disabled>
+        <input class="form-control" value="{{$user->tiponomina->nombre}}" disabled>
     </div>
         </div>
     </div>

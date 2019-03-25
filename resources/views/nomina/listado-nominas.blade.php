@@ -10,7 +10,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header pb-3 pt-2">
           <div class="container">
@@ -74,9 +74,17 @@
 
                 <th>No. Empleado</th>
 
-                <th class="d-none d-md-table-cell">Nombres</th>
+                <th>Nombres</th>
 
-                <th class="d-none d-md-table-cell">Apellidos</th>
+                <th>Apellidos</th>
+
+                <th>Puesto</th>
+
+                <th>Percepciones</th>
+
+                <th>Deducciones</th>
+
+                <th>Total pagado</th>
 
                 <th>Periodo</th>
 
@@ -92,9 +100,17 @@
 
                   <td>{{$nomina->empleado->id}}</td>
 
-                  <td class="d-none d-md-table-cell">{{$nomina->empleado->nombres}}</td>
+                  <td>{{$nomina->empleado->nombres}}</td>
 
-                  <td class="d-none d-md-table-cell">{{$nomina->empleado->apellidos}}</td>
+                  <td>{{$nomina->empleado->apellidos}}</td>
+
+                  <td>{{$nomina->empleado->puesto->nombre}}</td>
+
+                  <td class="money-format">{{$nomina->monto_percepciones}}</td>
+
+                  <td class="money-format">{{$nomina->monto_deducciones}}</td>
+
+                  <td class="money-format">{{$nomina->monto_totalpago}}</td>
 
                   <td>{{date('d/m/Y',strtotime($nomina->inicio_periodo))}} - {{date('d/m/Y',strtotime($nomina->fin_periodo))}}</td>
 
@@ -115,6 +131,17 @@
 
 @section('extra-scripts')
 <script>
+
+$(document).ready(function() {
+  $('.money-format').each(function() {
+      let value = parseFloat($(this).html());
+      if (value < 0) {
+          $(this).addClass('text-danger');
+      }
+      $(this).html(toMoney(value));
+  });
+});
+
 $('#btn-GenerarNomina').click(function() {
     swal({
       content: "input",

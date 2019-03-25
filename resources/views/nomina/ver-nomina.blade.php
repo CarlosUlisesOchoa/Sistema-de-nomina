@@ -106,7 +106,7 @@
                                                         <li>{{$nomina->empleado->nombres.' '.$nomina->empleado->apellidos}}</li>
                                                         <li>{{$nomina->empleado->curp}}</li>
                                                         <li>{{$nomina->empleado->rfc}}</li>
-                                                        <li>{{ucfirst(strtolower($nomina->empleado->tipo_contrato))}}</li>
+                                                        <li>{{$nomina->empleado->tipocontrato->nombre}}</li>
                                                         <li>{{$nomina->empleado->area->nombre}}</li>
                                                     </ul>
                                                 </div>
@@ -163,20 +163,20 @@
                     $vars = \Illuminate\Support\Facades\Schema::getColumnListing('nominas');
 
                     $percepciones = array();
-                    $suma_percepciones = 0;
                     $deducciones = array();
-                    $suma_deducciones = 0;
 
                     foreach($vars as $var) {
                         if (strpos($var, 'monto_') !== false) {
-                            if($var == 'monto_totalpago' || $nomina->$var == 0) continue;
+                            if($var == 'monto_totalpago' || $nomina->$var == 0 ||
+                            $var == 'monto_percepciones' || 
+                            $var == 'monto_deducciones') {
+                                continue;
+                        }
 
                             if($nomina->$var > 0) {
                                 $percepciones[$var] = $nomina->$var;
-                                $suma_percepciones += $nomina->$var;
                             } else {
                                 $deducciones[$var] = $nomina->$var;
-                                $suma_deducciones += $nomina->$var;
                             }
                         }
                     }
@@ -205,7 +205,7 @@
                                                 <h5>Total percepciones:</h5>
                                             </div>
                                             <div class="pt-2 col-5 text-left">
-                                                <h5 class="money-format">{{$suma_percepciones}}</h5>
+                                                <h5 class="money-format">{{$nomina->monto_percepciones}}</h5>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex d-md-none bg-per-dec">
@@ -238,7 +238,7 @@
                                         <h5>Total deducciones:</h5>
                                     </div>
                                     <div class="pt-2 col-6 text-left">
-                                        <h5 class="money-format">{{$suma_deducciones}}</h5>
+                                        <h5 class="money-format">{{$nomina->monto_deducciones}}</h5>
                                     </div>
                                 </div>
                                 <div class="row d-none d-md-flex">
@@ -248,7 +248,7 @@
                                                 <h5>Total percepciones:</h5>
                                             </div>
                                             <div class="col-5 text-left">
-                                                <h5 class="money-format">{{$suma_percepciones}}</h5>
+                                                <h5 class="money-format">{{$nomina->monto_percepciones}}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +258,7 @@
                                                 <h5>Total deducciones:</h5>
                                             </div>
                                             <div class="col-5 text-left">
-                                                <h5 class="money-format">{{$suma_deducciones}}</h5>
+                                                <h5 class="money-format">{{$nomina->monto_deducciones}}</h5>
                                             </div>
                                         </div>
                                     </div>

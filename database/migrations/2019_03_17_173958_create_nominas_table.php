@@ -31,6 +31,8 @@ class CreateNominasTable extends Migration
             $table->float('monto_isr');
             $table->float('monto_imss');
             $table->float('monto_cuotasindical');
+            $table->float('monto_percepciones');
+            $table->float('monto_deducciones');
             $table->float('monto_totalpago');
             $table->timestamps();
 

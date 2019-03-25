@@ -12,7 +12,7 @@ class Nomina extends Model
         'id', 'user_id', 'inicio_periodo', 'fin_periodo', 'dias_trabajados', 
         'dias_faltas', 'monto_faltas', 'monto_sueldo', 'dias_vacaciones', 'monto_vacaciones', 
         'monto_primavacacional', 'dias_aguinaldo', 'monto_aguinaldo', 'monto_utilidades', 
-        'monto_isr', 'monto_imss', 'monto_cuotasindical', 'monto_totalpago'
+        'monto_isr', 'monto_imss', 'monto_cuotasindical', 'monto_totalpago', 'monto_percepciones', 'monto_deducciones'
     ];
 
     public function empleado()

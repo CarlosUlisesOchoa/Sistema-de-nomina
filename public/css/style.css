@@ -1,6 +1,17 @@
 @charset "utf-8";
 /* CSS Document */
 
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@page { 
+  margin: 0mm;
+  margin-top: 20mm; 
+}
+
 
 #logo-main {
 	display: block;

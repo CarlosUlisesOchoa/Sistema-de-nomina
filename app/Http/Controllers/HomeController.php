@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\User;
+use App\Nomina;
 use Alert;
 
 class HomeController extends Controller
@@ -30,6 +32,25 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function myPaysheets()
+    {
+        $nominas = Nomina::where('user_id', Auth::user()->id)->get();
+        return view('empleado.mis-nominas', compact('nominas'))->with(array('MsgType' => 'info', 'Msg' => 'Info: Haga clic sobre alguna fila si desea consultar la información completa.'));
+    }
+
+    public function showMyPaysheet($id)
+    {
+        $nomina = Nomina::where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if($nomina != null) {
+            return view('nomina.ver-nomina')->with('nomina', $nomina);
+        }
+        
+        alert()->error('¡ No se encontró la nómina solicitada !', 'Error')->autoclose(4000);
+        
+        return redirect()->back()->with('msgData', array('type' => 'danger', 'msg' => 'La nómina solicitada no se pudo encontrar'));
+        
     }
 
     public function profile()

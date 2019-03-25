@@ -14,7 +14,8 @@
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
 
-    <title>{{ config('app.name', 'Laravel') }} @if(Request::url() != '') - @yield('title') @endif</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }} @if(strpos(\Request::url(), "/") == true) - @yield('title') @endif</title> --}}
+    <title>{{ config('app.name', 'Laravel') }} @if (trim($__env->yieldContent('title'))) - @yield('title') @endif</title>
 
 </head>
 
@@ -28,7 +29,10 @@
 
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav">
-                        <li class="nav-item @if(Route::currentRouteName() == '') active @endif"> <a class="nav-link" href="{{ url('/') }}">Inicio</a> </li>
+                        <li class="nav-item @if(Request::url() == '') active @endif"> <a class="nav-link" href="{{ url('/') }}">Inicio</a> </li>
+                        @auth
+                            <li class="nav-item @if(Route::currentRouteName() == 'mis-nominas') active @endif"> <a class="nav-link" href="{{ route('mis-nominas') }}">Mis nóminas</a> </li>
+                        @endif
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         @auth
@@ -67,15 +71,30 @@
     <main class="py-4">
 
         @if(!empty($Msg))
-        <div class="row justify-content-center">
-            <div id="alert-msg" class="ml-3 alert alert-{{$MsgType}} alert-dismissible fadex" role="alert">
+        <div class="row justify-content-center text-center">
+            <div id="alert-msg" class="col-11 ml-3 alert alert-{{$MsgType}} alert-dismissible fadex" role="alert">
                 {{ $Msg }}
                 <button id="btn-msg" type="button" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         </div>
-        @endif @yield('content')
+        @endif
+
+        @if(\Session::has('msgData'))
+            @if(empty($Msg)) 
+                <div class="row justify-content-center text-center">
+                    <div id="alert-msg" class="col-11 ml-3 alert alert-{{session()->get('msgData')['type']}} alert-dismissible fadex" role="alert">
+                        {{session()->get('msgData')['msg']}}
+                        <button id="btn-msg" type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            @endif
+        @endif
+
+        @yield('content')
 
     </main>
 

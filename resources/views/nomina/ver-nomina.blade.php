@@ -16,7 +16,11 @@
                         <div class="row">
               <div id="back-arrow" class="col-1 px-0">
                 <div width="33" height="33" id="" class="fadeimg">
+                @if (Auth::user()->isAdmin())
                   <a href="{{url('/admin')}}">
+                @else
+                  <a href="{{route('mis-nominas')}}">
+                @endif
                     <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
                     <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">
                   </a>
@@ -29,12 +33,15 @@
                     </div>
                 </div>
 
-                <div class="card-body">
+                <div id="card-body" class="card-body">
 
                     <div class="content-body">
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <button id="btn-pdf" class="btn btn-primary" role="button">Generar PDF</button>
+                        <div class="row justify-content-start mb-4">
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <button id="btn-genImg" class="btn btn-primary w-100" role="button">Descargar esta nómina</button>
+                            </div>
+                            <div class="col-12 col-sm-3 col-md-2 mt-2 mt-sm-0">
+                                <button id="btn-print" class="btn btn-success w-100" role="button">Imprimir</button>
                             </div>
                         </div>
                         <div id="nomina">
@@ -64,7 +71,7 @@
                                             <div class="container">
                                                 <div class="row">
                                                     <div id="bg-title" class="col-12 border border-danger rounded-left">
-                                                        <div class="d-flex align-items-center justify-content-center h-100">
+                                                        <div class="d-flex align-items-center justify-content-center">
                                                             <div class="d-flex flex-column">
                                                                 <h2 class="text align-self-center p-2 text-white">Recibo de nómina</h2>
                                                             </div>
@@ -358,7 +365,7 @@
             }
         });
     });
-    $('#btn-pdf').on('click', function() {
+    $('#btn-genImg').on('click', function() {
         html2canvas(document.querySelector("#nomina")).then(canvas => {
             a = document.createElement('a'); 
             document.body.appendChild(a); 
@@ -366,6 +373,19 @@
             a.href =  canvas.toDataURL();
             a.click();
         });
+    });
+
+    $('#btn-print').on('click', function () {
+        var win = window.open('','printwindow');
+        win.document.write('<html><head><title>Nomina #{{$nomina->id}}</title><link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.min.css') }}"><link href="{{asset('css/nomina.css')}}" rel="stylesheet" type="text/css" /><link href="{{ asset('css/style.css') }}" rel="stylesheet"></head><body>');
+        win.document.write($("#nomina").html());
+        win.document.write('</body></html>');
+        $(win).ready(function()
+        {
+            win.print();
+            win.close();
+        });
+        
     });
 </script>
 @endsection

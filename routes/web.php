@@ -20,6 +20,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/mis-nominas', 'HomeController@myPaysheets')->name('mis-nominas');
+
+Route::get('/mi-nomina/{id}', 'HomeController@showMyPaysheet');
+
 Route::get('/mi-perfil', 'HomeController@profile')->name('profile');
 
 Route::patch('/actualizar-perfil', 'HomeController@updateProfile')->name('update-profile');

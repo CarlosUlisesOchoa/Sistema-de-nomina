@@ -21,8 +21,12 @@
 
 <body>
     <header>
-        <a href="{{ url('/') }}"><img id="logo-main" src="{{ asset('images/logo.png') }} " width="50%" alt="Logo">
 
+        <div>
+            <a href="{{ url('/') }}">
+                <img class="w-75" id="logo-main" src="{{ asset('images/logo.png') }} " alt="Logo">
+            </a> 
+        </div>            
             <nav class="navbar navbar-expand-md navbar-dark bg-dark rounded border">
                 <a class="navbar-brand" href="{{ url('/') }}">Shane Corp &copy;</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>

@@ -47,7 +47,6 @@
                         <div id="nomina">
                             <section class="card">
                                 <div id="nomina-template" class="card-body">
-                                    <!-- nomina Company Details -->
                                     <div class="row justify-content-start">
                                         <div class="col-4 mb-3">
                                             <img src="{{asset('images/logo.png')}}" width="120%" alt="company logo" class="">
@@ -90,14 +89,12 @@
 
                                         </div>
                                     </div>
-                                    <!--/ nomina Company Details -->
-
-                                    <!-- nomina Customer Details -->
+ 
                                     <div id="nomina-customer-details" class="row pt-2">
-                                        <div class="col-md-7 col-sm-12 text-center text-md-left">
+                                        <div class="col-md-7 col-sm-12 text-md-left">
                                             <span class="text-muted">Datos del empleado</span>
                                             <div class="row">
-                                                <div id="employeer-data" class="col-4 pr-0">
+                                                <div id="employeer-data" class="col-4 pr-0 text-nowrap">
                                                     <ul class="px-0 list-unstyled">
                                                         <li>No. de empleado:</li>
                                                         <li>Nombre:</li>
@@ -107,7 +104,7 @@
                                                         <li>Area:</li>
                                                     </ul>
                                                 </div>
-                                                <div class="col-auto pl-0">
+                                                <div class="col-auto pl-3">
                                                     <ul class="px-0 list-unstyled">
                                                         <li>{{$nomina->empleado->id}}</li>
                                                         <li>{{$nomina->empleado->nombres.' '.$nomina->empleado->apellidos}}</li>
@@ -120,9 +117,9 @@
                                             </div>
 
                                         </div>
-                                        <div class="pt-4 col-md-5 col-sm-12 text-center text-md-left">
+                                        <div class="pt-4 col-md-5 col-sm-12  text-md-left">
                                             <div class="row">
-                                                <div class="col-4 pr-0">
+                                                <div class="col-4 pr-0 text-nowrap">
                                                     <ul class="px-0 list-unstyled">
                                                         <li>Puesto:</li>
                                                         <li>Sueldo diario:</li>
@@ -131,7 +128,7 @@
                                                         <li>Faltas:</li>
                                                     </ul>
                                                 </div>
-                                                <div class="col-auto pl-0">
+                                                <div class="col-auto pl-3">
                                                     <ul class="px-0 list-unstyled">
                                                         <li>{{$nomina->empleado->puesto->nombre}}</li>
                                                         <li><span class="money-format">{{$nomina->empleado->salario_diario}}</span></li>
@@ -382,8 +379,10 @@
         win.document.write('</body></html>');
         $(win).ready(function()
         {
-            win.print();
-            win.close();
+            sleep(1000).then(() => {
+                win.print();
+                win.close();
+            });
         });
         
     });

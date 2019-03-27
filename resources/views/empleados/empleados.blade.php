@@ -64,7 +64,7 @@
               <tbody>
                 @foreach($users as $user)
 
-                <tr class="cursor-pointer" onclick="window.location='{{ url('empleados').'/'.$user->id.'/edit' }}';" @if($user->cuenta_activa == false) class="table-secondary" @endif >
+                <tr class="cursor-pointer @if($user->cuenta_activa == false) table-secondary @endif" onclick="window.location='{{ url('empleados').'/'.$user->id.'/edit' }}';">
 
                   <td>{{$user->id}}</td>
 

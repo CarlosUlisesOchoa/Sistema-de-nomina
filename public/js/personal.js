@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
     $(document).on("keyup", ".name", function (event) {
         if($(this).val().length > 0) {
             $(this).val($(this).val().toLowerCase());

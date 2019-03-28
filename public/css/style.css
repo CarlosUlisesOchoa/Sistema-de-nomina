@@ -12,16 +12,25 @@
   margin-top: 20mm; 
 }
 
+.profile-photo {
+  min-width: 64px;
+  width: 128px;
+  height: 100%;
+}
+
 
 #logo-main {
 	display: block;
 	margin: 20px auto;
+  width: 50vw;
 }
 
-body{
-    margin-left:50px;
-	margin-right:50px;
+.btn-custom {
+    color: #fff;
+    background-color: #2484d6;
+    border-color: #62acea;
 }
+
 
 #back-arrow {
   flex-basis: 5.33333%;
@@ -55,10 +64,6 @@ body{
 
 .display-block {
   display: block;
-}
-
-#avatar-actual {
-	cursor: pointer;
 }
 
 .fadex {

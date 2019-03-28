@@ -291,10 +291,10 @@
             <div class="col-md-6">
 
                 @if(\Auth::user()->id == $user->id)
-                <input type="hidden" id="tipo_cuenta" name="tipo_cuenta" value="2">
+                <input type="hidden" name="tipo_cuenta" value="2">
                 @endif
 
-                <select id="tipo_cuenta" name="tipo_cuenta" class="form-control" @if(\Auth::user()->id == $user->id) disabled="disabled" @endif>
+                <select name="tipo_cuenta" class="form-control" @if(\Auth::user()->id == $user->id) disabled="disabled" @endif>
                     @foreach(\App\User::getOpciones('tipo_cuenta') as $index => $tipo_cuenta )
 
                     <option value="{{$index+1}}" {{ $user->tipo_cuenta == strtoupper($tipo_cuenta) ? 'selected' : '' }}>{{$tipo_cuenta}}</option>
@@ -330,6 +330,7 @@
             $("#form-userdata :input").prop("disabled", true);
         }
         $('#avatar-actual').click(function(){
+            alert("asd");
             $('#avatarFile').click();
         });
         $("input:file").change(function (){

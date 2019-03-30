@@ -21,15 +21,15 @@
                             <div class="col"><hr></div>
                         </div>
 
-                        <div class="row no-gutters">
+                        <div class="row pb-3">
 
-                            <div class="col-xs-12 pb-2 col-md-6 pr-md-2 col-lg-4 col-xl-3 pb-xl-0"> <a class="btn btn-primary inside-col" href="{{ route('empleados.index') }}" role="button">Administrar empleados</a></div>
-                            <div class="col-xs-12 pb-2 col-md-6 pr-md-2 col-lg-4 col-xl-3 pb-xl-0"> <a class="btn btn-primary inside-col" href="{{ route('areas.index') }}" role="button">Administrar areas</a></div>
-                            <div class="col-xs-12 pb-2 col-md-6 pr-md-2 col-lg-4 col-xl-3 pb-xl-0"> <a class="btn btn-primary inside-col" href="{{ route('puestos.index') }}" role="button">Administrar puestos</a></div>
-                            <div class="col-xs-12 col-md-6 pr-md-2 col-lg-4 col-xl-3"> <a class="btn btn-primary inside-col" href="{{ route('tipos-nomina.index') }}" role="button">Administrar tipos de nómina</a></div>
+                            <div class="[ col-xs-12 pb-3 ] [ col-md-6 ] [ col-lg-4 ]"> <a class="btn btn-primary inside-col" href="{{ route('empleados.index') }}" role="button">Administrar empleados</a></div>
+                            <div class="[ col-xs-12 pb-3 ] [ col-md-6 ] [ col-lg-4 ]"> <a class="btn btn-primary inside-col" href="{{ route('areas.index') }}" role="button">Administrar areas</a></div>
+                            <div class="[ col-xs-12 pb-3 ] [ col-md-6 ] [ col-lg-4 ]"> <a class="btn btn-primary inside-col" href="{{ route('puestos.index') }}" role="button">Administrar puestos</a></div>
 
-                            <div class="col-xs-12 pb-2 col-md-6 pr-md-2 col-lg-4 col-xl-3 pb-xl-0 mt-2 mt-md-0"> <a class="btn btn-primary inside-col" href="{{ route('tipos-contrato.index') }}" role="button">Administrar tipos de contrato</a></div>
+                            <div class="[ col-xs-12 pb-3 ] [ col-md-6 ] [ col-lg-4 ]"> <a class="btn btn-primary inside-col" href="{{ route('tipos-nomina.index') }}" role="button">Administrar tipos de nómina</a></div>
 
+                            <div class="[ col-xs-12 pb-3 ] [ col-md-6 ] [ col-lg-4 ]"> <a class="btn btn-primary inside-col" href="{{ route('tipos-contrato.index') }}" role="button">Administrar tipos de contrato</a></div>
                         </div>
 
                     <hr/>

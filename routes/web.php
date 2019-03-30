@@ -14,13 +14,13 @@
 
 Route::get('/', function () {
 	return view('welcome');
-});
+})->name('main-page');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/mis-nominas', 'HomeController@myPaysheets')->name('mis-nominas');
+Route::get('/mis-nominas', 'HomeController@myPaysheets')->name('my-paysheets');
 
 Route::get('/mi-nomina/{id}', 'HomeController@showMyPaysheet');
 

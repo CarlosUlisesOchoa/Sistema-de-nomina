@@ -12,10 +12,80 @@
   margin-top: 20mm; 
 }
 
-.profile-photo {
-  min-width: 64px;
-  width: 128px;
+* {
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html,
+body {
   height: 100%;
+  position: relative;
+}
+.main-content {
+  min-height: 60vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 100px; /* height of your footer */
+}
+
+#main-navbar {
+  margin-bottom: 0px !important;
+}
+  #main-navbar a {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  position: relative;
+  overflow: hidden;
+}
+  #main-navbar a:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    background: #fff;
+    height: 4px;
+    transition-property: left right;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+  }
+  #main-navbar a:hover:before {
+    left: 0;
+    right: 0;
+    color: white;
+  }
+
+.scroll-top {
+  min-width: 40px;
+  min-height: 40px;
+  width: 4.5vw;
+  height: 4.5vw;
+  border-radius: 2.25rem;
+  position: fixed;
+  bottom: 3vh;
+  left: 4vw;
+  display: none;
+  background-color: #038bfb66 !important;
+  z-index: 999;
+}
+.scroll-top:hover {
+  background-color: #056dc3 !important;
+}
+.scroll-top i {
+  display: inline-block;
+  color: #fff;
+}
+
+footer {
+  
+  bottom: 0;
+  width: 100%;
 }
 
 
@@ -52,6 +122,14 @@
 
 .dropdown:hover>.dropdown-menu {
   display: block;
+}
+
+.profile-photo {
+  margin-bottom: .5rem!important;
+  display: block;
+  border-radius: 50%!important;
+  min-width: 64px;
+  width: 10vw;
 }
 
 #avatar-new-info {

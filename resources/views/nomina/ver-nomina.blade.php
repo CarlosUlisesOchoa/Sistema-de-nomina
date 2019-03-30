@@ -7,6 +7,10 @@
 @endsection 
 
 @section('content')
+<div id="hidden-alert" class="row justify-content-center text-center display-none">
+    <div id="hidden-msg" class="col-11 ml-3 alert alert-info" role="alert">
+    </div>
+</div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -49,7 +53,7 @@
                                 <div id="nomina-template" class="card-body">
                                     <div class="row justify-content-start">
                                         <div class="col-4 mb-3">
-                                            <img src="{{asset('images/logo.png')}}" width="120%" alt="company logo" class="">
+                                            <img src="{{ asset('images/logo.svg') }}" width="120%" alt="company logo" class="">
                                         </div>
                                     </div>
                                     <div id="nomina-company-details" class="row">
@@ -377,6 +381,8 @@
         win.document.write('<html><head><title>Nomina #{{$nomina->id}}</title><link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.min.css') }}"><link href="{{asset('css/nomina.css')}}" rel="stylesheet" type="text/css" /><link href="{{ asset('css/style.css') }}" rel="stylesheet"></head><body>');
         win.document.write($("#nomina").html());
         win.document.write('</body></html>');
+        $('#hidden-msg').html('Recuerda cerrar la pestaña de impresión para continuar')
+        $('#hidden-alert').slideDown('slow').removeClass('display-none');
         $(win).ready(function()
         {
             sleep(1000).then(() => {
@@ -384,6 +390,12 @@
                 win.close();
             });
         });
+        let timer = setInterval(function() { 
+            if(win.closed) {
+                clearInterval(timer);
+                $('#hidden-alert').slideUp('slow');
+            }
+        }, 1000);
         
     });
 </script>

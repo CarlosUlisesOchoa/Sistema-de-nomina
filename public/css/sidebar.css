@@ -21,7 +21,7 @@ a:focus {
 }
 
 .navbar {
-    padding: 15px 10px;
+    padding: 5px 10px;
     background: #fff;
     border: none;
     border-radius: 0;
@@ -55,24 +55,39 @@ a:focus {
 #sidebar {
     min-width: 20vw;
     max-width: 20vw;
-    background: #2484d6;
+    min-height: 100vh;
+    max-height: 100vh;
     color: #fff;
-    transition: all 0.3s;
+    opacity: 0;
+    transition: margin-left 1s, opacity 1.5s;
     margin-left: -20vw;
+    background: rgba(0,0,0,1);
+    background: rgba(0,0,0,1);
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(28,28,28,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,1)), color-stop(100%, rgba(28,28,28,1)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(28,28,28,1) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(28,28,28,1) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(28,28,28,1) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(28,28,28,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#1c1c1c', GradientType=0 );
 }
 
 #sidebar.active {
     margin-left: 0px;
+    opacity: 1;
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
-    background: #0063b7;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #2b2b2b;
 }
 
 #sidebar ul p {
@@ -82,23 +97,27 @@ a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1.1em !important;
     display: block;
 }
 
 #sidebar ul li a:hover {
-    color: #2484d6;
-    background: #fff;
+    background: #343a40;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #0063b7;
+    background: #313131;
 }
 
 a[data-toggle="collapse"] {
     position: relative;
+}
+
+.sidebar-separator {
+    border-bottom: 1px solid #272727 !important;
+    padding-top: 1rem;
 }
 
 .dropdown-toggle::after {
@@ -107,6 +126,14 @@ a[data-toggle="collapse"] {
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+}
+
+.sb-sticky {
+  position: -webkit-sticky !important;
+    position: sticky;
+    top: 0;
+    
+  padding: 0 15px;
 }
 
 ul ul a {
@@ -127,16 +154,16 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
-a.download {
-    background: #fff;
-    color: #2484d6;
+.btn-red {
+    color: #fff;
+    background-color: #c70000;
+    border-color: #7d0303;
 }
 
-a.article,
-a.article:hover {
-    background: #0063b7 !important;
-    color: #fff !important;
+.btn-red:hover {
+    background-color: #900202 !important;
 }
+
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -144,9 +171,12 @@ a.article:hover {
 
 #content {
     width: 100%;
-    padding: 20px;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
     min-height: 100vh;
-    transition: all 0.3s;
+    transition: all 0.5s;
 }
 
 /* ---------------------------------------------------

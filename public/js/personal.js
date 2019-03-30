@@ -1,7 +1,30 @@
 $(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
+    $('#sidebarCollapse').on('click', function (e) {
+        e.stopPropagation();
         $('#sidebar').toggleClass('active');
     });
+    $('#sidebar').on('click', function (e) {
+        e.stopPropagation();
+    });
+    $('body,html').click(function(e){
+       $('#sidebar').removeClass('active');
+    });
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+          $('.scroll-top').fadeIn('slow');
+        } else {
+          $('.scroll-top').fadeOut('slow');
+        }
+    });
+
+    $('.scroll-top').click(function () {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 300);
+            return false;
+    });
+
     $(document).on("keyup", ".name", function (event) {
         if($(this).val().length > 0) {
             $(this).val($(this).val().toLowerCase());
@@ -171,6 +194,16 @@ function toMoney(amount) {
 
 function moneyToVar(moneyStr) {
     return parseFloat(moneyStr.replace("$ ", "").replace(",", ""));
+}
+
+function delayGo(url, milisec) {
+    if($('#btn-scrollTop').css('display') != 'none') {
+        $('#btn-scrollTop').click();
+    }
+    $('#sidebarCollapse').click();
+    sleep(milisec).then(() => {
+        window.location.href = url;
+    });
 }
 
 /***************** SLEEP FUNCTION *************/

@@ -101,6 +101,15 @@ footer {
     border-color: #62acea;
 }
 
+.btn-blue {
+    color: #fff;
+    background-color: #2584d5;
+    border-color: #5ea9e9;
+}
+  .btn-blue:hover {
+    background-color: #136cb7 !important;
+  }
+
 
 #back-arrow {
   flex-basis: 5.33333%;

@@ -44,10 +44,11 @@
             <div class="sidebar-separator"></div>
 
             <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="javascript:;" onclick="delayGo('{{route('main-page')}}',1500)">Página principal</a>
-                </li>
                 @auth
+                    <li>
+                        <a href="javascript:;" onclick="delayGo('{{route('main-page')}}',1500)">Página principal</a>
+                    </li>
+                
                     <li>
                         <a href="javascript:;" onclick="delayGo('{{route('profile')}}',1500)">Mi perfil</a>
                     </li>
@@ -59,7 +60,7 @@
                         <span class="text-justify">Inicia sesión si deseas acceder al contenido completo</span>
                     </li>
                     <li>
-                        <a href="javascript:;" onclick="delayGo('{{route('login')}}',1500)">Ver mis nóminas</a>
+                        <a href="javascript:;" class="btn btn-blue" onclick="delayGo('{{route('login')}}',1500)">Iniciar sesión</a>
                     </li>
                 @endif
                 
@@ -160,7 +161,7 @@
 
                       <!-- Content -->
                       <h6 class="text-uppercase text-center font-weight-bold">Acerca de Shane Corp ©</h6>
-                      <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 100%;">
+                      <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto w-100">
                       <p class="text-justify">Somos una empresa farmaceútica dedicada principalmente a la investigación y creación de sustancias capaces de mejorar las habilidades humanas mediante el uso de química aplicada</p>
 
                     </div>
@@ -170,7 +171,7 @@
 
                       <!-- Links -->
                       <h6 class="text-uppercase text-center font-weight-bold">Contacto</h6>
-                      <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 100%;">
+                      <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto w-100">
                       <div class="pl-5">
                       <p>
                         <i class="fas fa-home mr-3"></i> Uruapan, Mich 60050, MX</p>
@@ -189,7 +190,7 @@
                 <!-- Footer Links -->
 
                 <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">Copyright © 2019 by <a href="#" class="text-muted"> Shane</a>
+                <div class="footer-copyright text-center py-3">Copyright © 2019 by <a target="_blank" href="https://github.com/CarlosUlisesOchoa" class="text-muted"> Carlos Ulises</a>
                 </div>
                 <!-- Copyright -->
 

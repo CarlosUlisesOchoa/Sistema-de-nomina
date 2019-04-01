@@ -226,11 +226,10 @@ $( document ).ready(function() {
     $("#inicio_periodo").val(dateFormat(startDate));
     $("#fin_periodo").val(dateFormat(todaysDate));
     $("#sueldo").val(toMoney(salario_Diario * diasNomina));
-    $('#input-ISR').val(toMoney(-((salario_Diario * diasNomina) * {{$isr/100}})));
     $('#input-IMSS').val(toMoney(-(salario_Diario * diasNomina)*(0.02375)));
     $('#input-cuota-sindical').val(toMoney(-(salario_Diario * 0.01)));
+    $('#input-ISR').val(toMoney(-((salario_Diario * diasNomina) * {{$isr/100}})));
     updateSueldo();
-
     $(window).keydown(function(event){
         if(event.keyCode == 13) {
           event.preventDefault();
@@ -269,11 +268,12 @@ function updateSueldo(){
             total_amount += moneyToVar($('#input-utilidades').val());
         }
     }
-    total_amount += moneyToVar($('#input-ISR').val());
     total_amount += moneyToVar($('#input-IMSS').val());
     total_amount += moneyToVar($('#input-cuota-sindical').val());
-
-    $("#total-pago").val(toMoney(total_amount));
+    $('#input-ISR').val(toMoney(- ( (total_amount) * ({{$isr/100}}) )));
+    total_amount += moneyToVar($('#input-ISR').val());
+    $('#total-pago').val(toMoney(total_amount));
+    
 }
 
 function manage_Input(input, btn, hidden_Div, display_Type) {

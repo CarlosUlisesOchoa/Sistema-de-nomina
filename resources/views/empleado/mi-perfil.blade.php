@@ -36,9 +36,9 @@
                     <!-- badge -->
                     <div class="rank-label-container text-center">
                         <span class="label label-default rank-label" id="titulo-avatar">Foto de perfil</span>
-                        <div id="avatar-up-info"><small id="fileHelp" class="form-text text-muted text-center">Haga clic sobre la foto si desea cambiarla. La imagen no debe sobrepasar los 2MB.</small></div>
+                        <div id="avatar-up-info-1"><small id="fileHelp" class="form-text text-muted text-center">Haga clic sobre la foto si desea cambiarla. La imagen no debe sobrepasar los 2MB.</small></div>
                         
-                        <div id="avatar-new-info" class="mt-3 alert alert-success alert-dismissible fade show" role="alert">Se ha seleccionado una nueva imagen
+                        <div id="avatar-new-info-1" class="mt-3 alert alert-success alert-dismissible fade show display-none" role="alert">Se ha seleccionado una nueva imagen
                         </div>
 
                     </div>
@@ -302,22 +302,22 @@ $(document).ready(function () {
         var fileName = $(this).val();
         $(".filename").html(fileName);
         if(fileName != '') {
-            $('#avatar-up-info').hide();
-            $("#avatar-new-info").slideDown('slow').css("display", "block");
+            $('#avatar-up-info-1').hide();
+            $("#avatar-new-info-1").slideDown('slow').css("display", "block");
             if($('#div-GuardarCambios').css('display') == 'none') {
                 $('#div-GuardarCambios').slideDown('slow').css("display", "flex");
             }
 
         }
         else {
-            $('#avatar-new-info').fadeOut(500);
-            $('#avatar-up-info').delay(500).fadeIn("slow");
+            $('#avatar-new-info-1').fadeOut(500);
+            $('#avatar-up-info-1').delay(500).fadeIn("slow");
         }
     });
 
     $('#btn-GuardarCambios').on("click", function () {
         let changingPass = !$('#input-ActualPassword').prop("disabled");
-        let changingAvatar = ($("#avatar-new-info").css('display') != 'none');
+        let changingAvatar = ($("#avatar-new-info-1").css('display') != 'none');
         if(changingPass == false && changingAvatar == false) {
             swal({
                 title: "Error",

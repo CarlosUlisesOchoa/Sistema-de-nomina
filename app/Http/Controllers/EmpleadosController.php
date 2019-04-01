@@ -99,8 +99,8 @@ class EmpleadosController extends Controller
 
         $data['fec_nac'] = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', $data['fec_nac']))->format('Y-m-d');
 
-        if(empty($data->rfc)) {
-            $data['rfc'] = 'XD';
+        if(empty($request->rfc)) {
+            $data['rfc'] = 'XAFF000';
         }
 
         if(empty($data->dias_descanso)) {

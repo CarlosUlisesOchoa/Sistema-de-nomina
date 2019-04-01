@@ -46,7 +46,7 @@
                         <span class="label label-default rank-label" id="titulo-avatar">Foto de perfil</span>
                         <div id="avatar-up-info"><small id="fileHelp" class="form-text text-muted text-center">Haga clic sobre la foto si desea cambiarla. La imagen no debe sobrepasar los 2MB.</small></div>
                         
-                        <div id="avatar-new-info" class="mt-3 alert alert-success alert-dismissible fade show" role="alert">Se ha seleccionado una nueva imagen
+                        <div id="avatar-new-info" class="mt-3 alert alert-success alert-dismissible fade show display-none" role="alert">Se ha seleccionado una nueva imagen
                         </div>
 
                     </div>
@@ -330,7 +330,6 @@
             $("#form-userdata :input").prop("disabled", true);
         }
         $('#avatar-actual').click(function(){
-            alert("asd");
             $('#avatarFile').click();
         });
         $("input:file").change(function (){
@@ -339,7 +338,7 @@
          if(fileName != '') {
 
             $('#avatar-up-info').hide();
-            $("avatar-new-info").css("display", "block");
+            $("#avatar-new-info").slideDown('slow').css("display", "block");
         }
         else {
             $('#avatar-new-info').fadeOut(500);

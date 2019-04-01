@@ -23,7 +23,7 @@
                 @if (Auth::user()->isAdmin())
                   <a href="{{url('/admin')}}">
                 @else
-                  <a href="{{route('mis-nominas')}}">
+                  <a href="{{route('my-paysheets')}}">
                 @endif
                     <img width="33" height="33" class="bottom" src="{{asset('images/back-hover.png')}}">
                     <img width="33" height="33" class="top" src="{{asset('images/back.png')}}">

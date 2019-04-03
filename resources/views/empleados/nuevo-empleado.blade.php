@@ -44,7 +44,7 @@
                     <div class="rank-label-container text-center">
                         <div id="avatar-up-info"><small id="fileHelp" class="form-text text-muted text-center">Haga clic sobre la imagen de arriba si desea subir una foto de perfil.</small></div>
                         
-                        <div id="avatar-new-info" class="mt-3 alert alert-success alert-dismissible fade show" role="alert">
+                        <div id="avatar-new-info-3" class="mt-3 alert alert-success alert-dismissible fade show display-none" role="alert">
                             <h4 class="alert-heading">Foto de perfil</h4>
                             <p class="text-left">Has seleccionado una foto correctamente, la imagen será subida en cuanto llenes todos los campos y hagas clic sobre <strong>"Registrar"</strong></p>
                             <hr>
@@ -332,11 +332,11 @@
             $('#avatar-up-info').fadeOut(500)
             $('#avatar-actual').fadeOut(500);
             sleep(500).then(() => {
-              document.getElementById("avatar-new-info").style.display = "block";
+              document.getElementById("avatar-new-info-3").style.display = "block";
           })
         }
         else {
-            $('#avatar-new-info').fadeOut(500);
+            $('#avatar-new-info-3').fadeOut(500);
             $('#avatar-up-info').delay(500).fadeIn("slow");
             $('#avatar-actual').delay(500).fadeIn("slow");
         }

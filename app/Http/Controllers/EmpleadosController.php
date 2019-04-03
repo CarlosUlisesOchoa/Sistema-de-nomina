@@ -87,6 +87,7 @@ class EmpleadosController extends Controller
             'genero' => 'required',
             'estado_civil' => 'required',
             'curp' => 'required',
+            'rfc' => 'required',
             'domicilio' => 'required',
             'cta_bancaria' => 'required',
             'salario_diario' => 'required',

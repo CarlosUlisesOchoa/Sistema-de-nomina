@@ -22,18 +22,17 @@ Este trabajo fue realizado como un proyecto final escolar, consiste en un sitio 
     <li>Capacidad de solicitar versión imprimible de la nómina requerida</li>
     <li>Capacidad de guardar la nómina como PDF o como imagen</li>
 </ul>
-    
 
 ## Licencia
 
 Este proyecto esta licenciado por la [Licencia MIT](https://opensource.org/licenses/MIT).
 
-# About developer
+# Acerca del desarrollador
 
-Visit my website [Carlos Ulises](http://www.carlosulises.ml)
+Visita mi página web [Carlos Ulises](http://www.carlosulises.ml)
 
 <p align="center">
 <a href="http://www.carlosulises.ml" target="_BLANK">
-<img width="750" height="255" src="https://raw.githubusercontent.com/CarlosUlisesOchoa/Sistema-de-nomina/master/public/images/2019-04-24_12h34_49.png?token=AGIQBRWVTQY7XSHIMDGLNEK4YCPXM" />
+<img width="750" height="255" src="https://github.com/CarlosUlisesOchoa/Sistema-de-nomina/blob/master/public/images/2019-04-24_12h34_49.png?raw=true" />
 </a>
 </p>

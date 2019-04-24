@@ -1,7 +1,10 @@
 <p align="center"><img width="640" heigth="104" src="https://github.com/CarlosUlisesOchoa/Sistema-de-nomina/blob/master/public/images/logo.png?raw=true"></p>
 
-[![Current Version](https://img.shields.io/badge/version-1.1.0-green.svg)](https://github.com/CarlosUlisesOchoa/Sistema-de-nomina) 
-[![Live Demo](https://img.shields.io/badge/demo-online-green.svg)](http://shane-corpo.000webhostapp.com)
+<p align="center">
+<a href="https://github.com/CarlosUlisesOchoa/Sistema-de-nomina" target="_BLANK"><img src="https://img.shields.io/badge/version-1.1.0-green.svg"/></a>
+<a href="http://shane-corpo.000webhostapp.com" target="_BLANK"><img src="https://img.shields.io/badge/demo-online-green.svg"/></a>
+</p>
+
 
 ## Acerca de este proyecto
 
@@ -31,6 +34,6 @@ Visit my website [Carlos Ulises](http://www.carlosulises.ml)
 
 <p align="center">
 <a href="http://www.carlosulises.ml" target="_BLANK">
-<img width="700" height="382" src="https://github.com/CarlosUlisesOchoa/Calculador-de-integrales-definidas-java/blob/master/project%20images/dev.png?raw=true" />
+<img width="750" height="255" src="https://raw.githubusercontent.com/CarlosUlisesOchoa/Sistema-de-nomina/master/public/images/2019-04-24_12h34_49.png?token=AGIQBRWVTQY7XSHIMDGLNEK4YCPXM" />
 </a>
 </p>

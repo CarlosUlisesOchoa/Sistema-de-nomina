@@ -33,6 +33,6 @@ Visita mi página web [Carlos Ulises](http://www.carlosulises.ml)
 
 <p align="center">
 <a href="http://www.carlosulises.ml" target="_BLANK">
-<img width="750" height="255" src="https://github.com/CarlosUlisesOchoa/Sistema-de-nomina/blob/master/public/images/2019-04-24_12h34_49.png?raw=true" />
+<img width="85%" height="85%" src="https://github.com/CarlosUlisesOchoa/Roulette-pictures-game-Java-SQLite/blob/master/project%20images/dev.jpg?raw=true" />
 </a>
 </p>
